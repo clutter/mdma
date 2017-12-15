@@ -8,7 +8,10 @@ class BuildsController < ApplicationController
     app.binary = file.open
     app.save
 
-    redirect_to @build, notice: 'Build was deployed to SimpleMDM.'
+    app_group = SimpleMDM::AppGroup.find 21708
+    app_group.push_apps
+
+    redirect_to @build, notice: 'Build was deployed to SimpleMDM and pushed to devices.'
   end
 
   # GET /builds
