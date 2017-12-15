@@ -12,6 +12,6 @@ class DeployPackageJob < ApplicationJob
 
     app_group = SimpleMDM::AppGroup.find 21708
     app_group.push_apps
-    Slack.nofify("New build of UglySweater released.")
+    Slack.notify("New build of UglySweater released.")
   end
 end
