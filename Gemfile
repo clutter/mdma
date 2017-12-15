@@ -6,6 +6,8 @@ gem "aws-sdk-s3", require: false
 
 gem 'simplemdm'
 
+gem 'yt-auth'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0.beta2'
 # Use postgresql as the database for Active Record

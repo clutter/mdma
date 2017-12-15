@@ -1,4 +1,5 @@
 class BuildsController < ApplicationController
+  before_action :require_authentication
   before_action :set_build, only: [:show, :edit, :update, :destroy, :deploy]
 
   def deploy
