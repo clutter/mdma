@@ -1,0 +1,27 @@
+<%= form_with(model: build, local: true) do |form| %>
+  <% if build.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(build.errors.count, "error") %> prohibited this build from being saved:</h2>
+
+      <ul>
+      <% build.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :deployed_at %>
+    <%= form.datetime_select :deployed_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :package %>
+    <%= form.file_field :package %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
