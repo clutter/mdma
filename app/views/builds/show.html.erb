@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Deployed at:</strong>
+  <strong>Upload and Push at:</strong>
   <%= @build.deployed_at %>
 </p>
 
@@ -9,10 +9,6 @@
   <strong>Package</strong>
   <%= link_to "Download", rails_blob_url(@build.package, disposition: "attachment") %>
 </p>
-
-<%= form_with(model: @build, local: true, url: deploy_build_path(@build)) do |form| %>
-  <%= form.submit 'Deploy to SimpleMDM' %>
-<% end %>
 
 <%= link_to 'Edit', edit_build_path(@build) %> |
 <%= link_to 'Back', builds_path %>

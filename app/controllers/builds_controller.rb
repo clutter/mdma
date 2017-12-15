@@ -1,19 +1,6 @@
 class BuildsController < ApplicationController
   before_action :require_authentication
-  before_action :set_build, only: [:show, :edit, :update, :destroy, :deploy]
-
-  def deploy
-    app = SimpleMDM::App.find 55475
-    file = Tempfile.open ['package', '.ipa'], encoding: 'ASCII-8BIT'
-    file.write @build.package.download
-    app.binary = file.open
-    app.save
-
-    app_group = SimpleMDM::AppGroup.find 21708
-    app_group.push_apps
-
-    redirect_to @build, notice: 'Build was deployed to SimpleMDM and pushed to devices.'
-  end
+  before_action :set_build, only: [:show, :edit, :update, :destroy]
 
   # GET /builds
   # GET /builds.json
