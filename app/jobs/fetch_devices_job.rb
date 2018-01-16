@@ -11,7 +11,7 @@ class FetchDevicesJob < ActiveJob::Base
 
     app_devices.each do |device|
       app = device.installed_apps.find do |app|
-        app["identifier"] == "com.clutter.UglySweater" # com.clutter.scan-wms
+        app["identifier"] == 'com.clutter.scan-wms'
       end
 
       device = Device.find_or_initialize_by name: device.name
