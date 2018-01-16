@@ -69,6 +69,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.4.6)
+    honeybadger (3.2.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.9.1)
@@ -177,6 +178,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3 (~> 1.8)
   bootsnap (>= 1.1.0)
+  honeybadger (~> 3.1)
   pg (~> 0.18)
   pry-nav (~> 0.2.4)
   puma (~> 3.11)
