@@ -1,27 +1,24 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Builds</h1>
-
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Deployed at</th>
-      <th colspan="3"></th>
+      <th>Status</th>
+      <th>Deploy at</th>
+      <th>Package</th>
+      <!--th>Actions</th-->
     </tr>
   </thead>
 
   <tbody>
     <% @builds.each do |build| %>
       <tr>
-        <td><%= build.deployed_at %></td>
-        <td><%= link_to 'Show', build %></td>
-        <td><%= link_to 'Edit', edit_build_path(build) %></td>
-        <td><%= link_to 'Destroy', build, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= build.status %></td>
+        <td>
+          <%= l build.deploy_at.in_time_zone, format: :verbose %>
+          (<%= time_ago_in_words build.deploy_at %> from now)
+        </td>
+        <td><%= link_to "Download", rails_blob_url(build.package, disposition: "attachment") %></td>
+        <!-- <td>Cancel</td>add icons -->
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Build', new_build_path %>

@@ -1,6 +1,6 @@
 require 'slack'
 
-class DeployPackageJob < ApplicationJob
+class DeployJob < ApplicationJob
   queue_as :default
 
   def perform(build)
@@ -12,6 +12,6 @@ class DeployPackageJob < ApplicationJob
 
     app_group = SimpleMDM::AppGroup.find 21708
     app_group.push_apps
-    Slack.notify("New build of UglySweater released.")
+    build.successful!
   end
 end

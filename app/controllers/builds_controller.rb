@@ -1,6 +1,6 @@
 class BuildsController < ApplicationController
   before_action :require_authentication
-  before_action :set_build, only: [:show, :edit, :update, :destroy]
+  before_action :set_build, only: [:show, :edit]
 
   def index
     @builds = Build.all
@@ -13,9 +13,6 @@ class BuildsController < ApplicationController
     @build = Build.new
   end
 
-  def edit
-  end
-
   def create
     @build = Build.new(build_params)
 
@@ -26,19 +23,6 @@ class BuildsController < ApplicationController
     end
   end
 
-  def update
-    if @build.update(build_params)
-      redirect_to @build, notice: 'Build was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @build.destroy
-    redirect_to builds_url, notice: 'Build was successfully destroyed.'
-  end
-
 private
 
   def set_build
@@ -46,6 +30,6 @@ private
   end
 
   def build_params
-    params.require(:build).permit(:deployed_at, :package)
+    params.require(:build).permit :deploy_date, :deploy_time, :package
   end
 end
