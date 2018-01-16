@@ -4,7 +4,7 @@ class DeployJob < ActiveJob::Base
   queue_as :default
 
   def perform(build)
-    app = SimpleMDM::App.find 55475 # 16714
+    app = SimpleMDM::App.find 16714
     file = Tempfile.open ['package', '.ipa'], encoding: 'ASCII-8BIT'
     file.write build.package.download
     app.binary = file.open
