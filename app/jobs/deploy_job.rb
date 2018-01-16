@@ -10,7 +10,7 @@ class DeployJob < ActiveJob::Base
     app.binary = file.open
     app.save
 
-    app_group = SimpleMDM::AppGroup.find 21708 # 7017
+    app_group = SimpleMDM::AppGroup.find 7017
     app_group.push_apps
 
     app_devices = SimpleMDM::Device.all.select do |device|

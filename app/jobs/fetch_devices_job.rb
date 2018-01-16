@@ -2,7 +2,7 @@ class FetchDevicesJob < ActiveJob::Base
   queue_as :default
 
   def perform
-    app_group = SimpleMDM::AppGroup.find 21708 # 7017
+    app_group = SimpleMDM::AppGroup.find 7017
     app_devices = SimpleMDM::Device.all.select do |device|
       device.device_group_id.in? app_group.device_group_ids
     end
