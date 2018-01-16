@@ -12,6 +12,15 @@ class DeployJob < ActiveJob::Base
 
     app_group = SimpleMDM::AppGroup.find 21708 # 7017
     app_group.push_apps
+
+    app_devices = SimpleMDM::Device.all.select do |device|
+      device.device_group_id.in? app_group.device_group_ids
+    end
+
+    app_devices.map &:refresh
+
+    Slack.notify "Build of #{app.name} released to #{app_devices.size} devices."
+
     build.successful!
   end
 end
