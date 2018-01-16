@@ -19,9 +19,9 @@
       <% if logged_in? %>
       <div>
         <ul class="navbar-nav mr-auto">
-          <%= nav_link_to 'Show builds', root_path, icon: 'list-alt' %>
+          <%= nav_link_to 'Show builds', root_path, icon: 'archive' %>
           <%= nav_link_to 'Show devices', devices_path, icon: 'mobile' %>
-          <%= nav_link_to 'Schedule new build', new_build_path, icon: 'cloud-upload-alt' %>
+          <%= nav_link_to 'Upload new build', new_build_path, icon: 'cloud-upload-alt' %>
         </ul>
       </div>
       <% end %>

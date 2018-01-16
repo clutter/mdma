@@ -1,13 +1,22 @@
-class FetchDevicesJob < ApplicationJob
+class FetchDevicesJob < ActiveJob::Base
   queue_as :default
 
-  def perform(*args)
-    Device.destroy_all
+  def perform
+    app_group = SimpleMDM::AppGroup.find 21708 # 7017
+    app_devices = SimpleMDM::Device.all.select do |device|
+      device.device_group_id.in? app_group.device_group_ids
+    end
 
-    devices = SimpleMDM::Device.all
-    devices.each do |device|
-      app = device.installed_apps.find{|app| app["identifier"] == "com.clutter.UglySweater"}
-      Device.create! name: device.name, app_version: app.version if app
+    Device.where.not(name: app_devices.map(&:name)).destroy_all
+
+    app_devices.each do |device|
+      app = device.installed_apps.find do |app|
+        app["identifier"] == "com.clutter.UglySweater" # com.clutter.scan-wms
+      end
+
+      device = Device.find_or_initialize_by name: device.name
+      device.app_version = app.version if app
+      device.save!
     end
   end
 end

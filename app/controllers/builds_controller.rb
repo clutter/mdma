@@ -3,21 +3,21 @@ class BuildsController < ApplicationController
   before_action :set_build, only: [:show, :edit]
 
   def index
-    @builds = Build.all
+    @builds = Build.order(deploy_at: :desc)
   end
 
   def show
   end
 
   def new
-    @build = Build.new
+    @build = Build.new deploy_time: Time.strptime('22:30', '%H:%M')
   end
 
   def create
     @build = Build.new(build_params)
 
     if @build.save
-      redirect_to @build, notice: 'Build was successfully created.'
+      redirect_to root_url
     else
       render :new
     end

@@ -1,2 +1,2 @@
-class Device < ApplicationRecord
+class Device < ActiveRecord::Base
 end

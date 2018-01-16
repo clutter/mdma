@@ -1,12 +1,12 @@
-class Build < ApplicationRecord
+class Build < ActiveRecord::Base
   has_one_attached :package
   validates :package_attachment, presence: true
 
   enum status: %i(scheduled enqueued failed successful canceled)
 
   attr_accessor :deploy_date, :deploy_time
-  validates :deploy_date, :deploy_time, presence: true
-  validate do
+  validates :deploy_date, :deploy_time, presence: true, on: :create
+  validate on: :create do
     begin
       self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'
       if self.deploy_date < Time.zone.today
@@ -30,15 +30,8 @@ class Build < ApplicationRecord
     self.deploy_at ||= deploy_date + deploy_time.seconds_since_midnight.seconds
   end
 
-  after_commit :schedule_deploy, on: :create
-
   def enqueue
-    DeployJob.set(wait_until: DateTime.parse(deploy_at)).perform_later self
-  end
-
-private
-
-  def schedule_deploy
-    DeployPackageJob.set(wait_until: deploy_at).perform_later(self)
+    DeployJob.set(wait_until: deploy_at).perform_later self
+    enqueued!
   end
 end
