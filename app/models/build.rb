@@ -17,7 +17,7 @@ class Build < ActiveRecord::Base
     end if deploy_date.present?
 
     begin
-      self.deploy_time = Time.strptime deploy_time, '%H:%M'
+      self.deploy_time = Time.zone.strptime deploy_time, '%H:%M'
       if self.deploy_date == Time.zone.today && self.deploy_time < Time.zone.now
         errors.add :deploy_time, 'must be in the future'
       end
