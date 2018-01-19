@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
 
   def index
-    @devices = Device.all
+    @devices = Device.select(:app_version, :name).order('app_version desc nulls last').group_by(&:app_version)
   end
 
   def show

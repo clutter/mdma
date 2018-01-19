@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_16_001652) do
+ActiveRecord::Schema.define(version: 2018_01_18_173703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2018_01_16_001652) do
     t.integer "app_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["app_version"], name: "index_devices_on_app_version"
   end
 
 end

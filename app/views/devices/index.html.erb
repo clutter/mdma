@@ -1,18 +1,20 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>App version</th>
-      <!--th>Actions</th-->
+      <th scope="col">Version</th>
+      <th scope="col">Devices</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @devices.each do |device| %>
+    <% @devices.each do |version, devices| %>
       <tr>
-        <td><%= device.name %></td>
-        <td><%= device.app_version %></td>
-        <!-- <td>Cancel</td>add icons -->
+        <th scope="row">
+          <%= pluralize devices.count, 'device' %> on version <%= version %>
+        </th>
+        <td>
+          <%= devices.map(&:name).sort.join ' ' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
