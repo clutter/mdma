@@ -31,8 +31,6 @@ How to use
 How it works
 ------------
 
-The app is hosted on Heroku and relies on two jobs run by Heroku Scheduler:
+The app is hosted on Heroku and relies on one job run by Heroku Scheduler:
 
 - `bundle exec rake builds:enqueue` runs every 10 minutes and checks whether any build needs to be deployed soon
-
-- `rails runner 'FetchDevicesJob.perform_later'` runs every hour and refreshes the list of devices
