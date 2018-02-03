@@ -10,7 +10,9 @@
     <% @devices.each do |version, devices| %>
       <tr>
         <th scope="row">
-          <%= pluralize devices.count, 'device' %> on version <%= version %>
+          <span style="white-space: nowrap">
+            <%= pluralize devices.count, 'device' %> on version <%= version %>
+          </span>
         </th>
         <td>
           <%= devices.map(&:name).sort.join ' ' %>
