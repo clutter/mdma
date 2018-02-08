@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_18_173703) do
+ActiveRecord::Schema.define(version: 2018_02_08_230712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2018_01_18_173703) do
     t.integer "status", default: 0, null: false
   end
 
+  create_table "deploys", force: :cascade do |t|
+    t.bigint "build_id"
+    t.datetime "deploy_at"
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["build_id"], name: "index_deploys_on_build_id"
+  end
+
   create_table "devices", force: :cascade do |t|
     t.string "name"
     t.integer "app_version"
@@ -51,4 +60,5 @@ ActiveRecord::Schema.define(version: 2018_01_18_173703) do
     t.index ["app_version"], name: "index_devices_on_app_version"
   end
 
+  add_foreign_key "deploys", "builds"
 end

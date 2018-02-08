@@ -2,6 +2,8 @@ class Build < ActiveRecord::Base
   has_one_attached :package
   validates :package_attachment, presence: true
 
+  has_many :deploys, dependent: :destroy
+
   enum status: %i(scheduled enqueued failed successful canceled running)
 
   attr_accessor :deploy_date, :deploy_time

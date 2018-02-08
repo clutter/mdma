@@ -1,32 +1,44 @@
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Deploy on</th>
-      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @builds.each do |build| %>
-      <tr class="<%=
-        if build.enqueued?
-          'table-warning'
-        elsif build.successful?
-          'table-success'
-        elsif build.failed?
-          'table-danger'
-        end
-       %>">
+      <tr class="table-default">
+        <td><%= build.id %></td>
         <td>
           <%= l build.deploy_at.in_time_zone, format: :verbose %>
           (<%= time_ago_in_words build.deploy_at %>
             <%= build.deploy_at.past? ? 'ago' : 'from now' %>)
         </td>
-        <td><%= build.status %></td>
         <td><%= link_to "Download", rails_blob_url(build.package, disposition: "attachment") %></td>
         <!-- <td>Cancel</td>add icons -->
       </tr>
+      <% build.deploys.each do |deploy| %>
+        <tr class="<%=
+          if deploy.enqueued?
+            'table-warning'
+          elsif deploy.successful?
+            'table-success'
+          elsif deploy.failed?
+            'table-danger'
+          end
+         %>">
+          <td></td>
+          <td>
+            <%= l deploy.deploy_at.in_time_zone, format: :verbose %>
+            (<%= time_ago_in_words deploy.deploy_at %>
+              <%= deploy.deploy_at.past? ? 'ago' : 'from now' %>)
+          </td>
+          <td><%= deploy.status %></td>
+        </tr>
+      <% end %>
+
     <% end %>
   </tbody>
 </table>
