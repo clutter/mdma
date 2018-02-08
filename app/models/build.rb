@@ -2,7 +2,7 @@ class Build < ActiveRecord::Base
   has_one_attached :package
   validates :package_attachment, presence: true
 
-  enum status: %i(scheduled enqueued failed successful canceled)
+  enum status: %i(scheduled enqueued failed successful canceled running)
 
   attr_accessor :deploy_date, :deploy_time
   validates :deploy_date, :deploy_time, presence: true, on: :create

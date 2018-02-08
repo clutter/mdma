@@ -5,6 +5,9 @@ class DeployJob < ActiveJob::Base
 
   def perform(build)
     app = SimpleMDM::App.find 16714
+    Slack.notify "Build of #{app.name} started."
+    build.running!
+
     file = Tempfile.open ['package', '.ipa'], encoding: 'ASCII-8BIT'
     file.write build.package.download
     app.binary = file.open
@@ -20,7 +23,6 @@ class DeployJob < ActiveJob::Base
     app_devices.map &:refresh
 
     Slack.notify "Build of #{app.name} released to #{app_devices.size} devices."
-
     build.successful!
   end
 end
