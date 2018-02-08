@@ -3,7 +3,7 @@ class BuildsController < ApplicationController
   before_action :set_build, only: [:show, :edit]
 
   def index
-    @builds = Build.order(deploy_at: :desc)
+    @builds = Build.with_attached_package.includes(deploys: :timeslot).order(deploy_at: :desc)
   end
 
   def show

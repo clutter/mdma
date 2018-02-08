@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_08_230712) do
+ActiveRecord::Schema.define(version: 2018_02_08_232224) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,9 @@ ActiveRecord::Schema.define(version: 2018_02_08_230712) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "timeslot_id"
     t.index ["build_id"], name: "index_deploys_on_build_id"
+    t.index ["timeslot_id"], name: "index_deploys_on_timeslot_id"
   end
 
   create_table "devices", force: :cascade do |t|
@@ -60,5 +62,12 @@ ActiveRecord::Schema.define(version: 2018_02_08_230712) do
     t.index ["app_version"], name: "index_devices_on_app_version"
   end
 
+  create_table "timeslots", force: :cascade do |t|
+    t.text "prefixes", null: false, array: true
+    t.integer "delay_in_hours", null: false
+    t.index ["delay_in_hours"], name: "index_timeslots_on_delay_in_hours"
+  end
+
   add_foreign_key "deploys", "builds"
+  add_foreign_key "deploys", "timeslots"
 end

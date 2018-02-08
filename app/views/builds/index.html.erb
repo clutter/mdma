@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Deploy on</th>
+      <th>Deploy</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -12,9 +12,7 @@
       <tr class="table-default">
         <td><%= build.id %></td>
         <td>
-          <%= l build.deploy_at.in_time_zone, format: :verbose %>
-          (<%= time_ago_in_words build.deploy_at %>
-            <%= build.deploy_at.past? ? 'ago' : 'from now' %>)
+          on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>
         <td><%= link_to "Download", rails_blob_url(build.package, disposition: "attachment") %></td>
         <!-- <td>Cancel</td>add icons -->
@@ -31,14 +29,12 @@
          %>">
           <td></td>
           <td>
-            <%= l deploy.deploy_at.in_time_zone, format: :verbose %>
-            (<%= time_ago_in_words deploy.deploy_at %>
-              <%= deploy.deploy_at.past? ? 'ago' : 'from now' %>)
+            after <%= pluralize deploy.timeslot.delay_in_hours, 'hour' %>
+            for <%= deploy.timeslot.prefixes.to_sentence.presence || 'all' %> devices
           </td>
           <td><%= deploy.status %></td>
         </tr>
       <% end %>
-
     <% end %>
   </tbody>
 </table>
