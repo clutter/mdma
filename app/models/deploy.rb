@@ -4,7 +4,7 @@ class Deploy < ActiveRecord::Base
 
   scope :with_associations, -> { includes(:timeslot, :build).references(:timeslot, :build) }
 
-  enum status: %i(scheduled enqueued failed successful canceled running)
+  enum status: %i[scheduled enqueued failed successful canceled running]
 
   def includes_device_named?(device_name)
     timeslot.prefixes.any? do |prefix|
