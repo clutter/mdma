@@ -4,8 +4,6 @@ class Build < ActiveRecord::Base
 
   has_many :deploys, dependent: :destroy
 
-  enum status: %i(scheduled enqueued failed successful canceled running)
-
   attr_accessor :deploy_date, :deploy_time
   validates :deploy_date, :deploy_time, presence: true, on: :create
   validate on: :create do
@@ -32,8 +30,7 @@ class Build < ActiveRecord::Base
     self.deploy_at ||= deploy_date + deploy_time.seconds_since_midnight.seconds
   end
 
-  def enqueue
-    DeployJob.set(wait_until: deploy_at).perform_later self
-    enqueued!
+  before_create do
+    self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
   end
 end

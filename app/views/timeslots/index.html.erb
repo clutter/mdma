@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Delay in hours</th>
+      <th scope="col">Devices starting with</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeslots.each do |timeslot| %>
+      <tr>
+        <th scope="row"><%= timeslot.delay_in_hours %></th>
+        <td><%= timeslot.prefixes.sort.join ' ' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_08_232224) do
+ActiveRecord::Schema.define(version: 2018_02_08_235915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,12 +40,10 @@ ActiveRecord::Schema.define(version: 2018_02_08_232224) do
     t.datetime "deploy_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
   end
 
   create_table "deploys", force: :cascade do |t|
     t.bigint "build_id"
-    t.datetime "deploy_at"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,6 +63,7 @@ ActiveRecord::Schema.define(version: 2018_02_08_232224) do
   create_table "timeslots", force: :cascade do |t|
     t.text "prefixes", null: false, array: true
     t.integer "delay_in_hours", null: false
+    t.boolean "enabled", default: true, null: false
     t.index ["delay_in_hours"], name: "index_timeslots_on_delay_in_hours"
   end
 

@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-sm">
   <thead>
     <tr>
       <th>ID</th>
@@ -25,6 +25,10 @@
             'table-success'
           elsif deploy.failed?
             'table-danger'
+          elsif deploy.scheduled?
+            'table-active'
+          elsif deploy.running?
+            'table-primary'
           end
          %>">
           <td></td>
