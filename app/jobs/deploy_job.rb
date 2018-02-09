@@ -24,7 +24,7 @@ class DeployJob < ActiveJob::Base
       device_count += 1
     end
 
-    Slack.notify "Build of #{app.name} released to #{pluralize device_count, "device"} in #{deploy.timeslot.prefixes.to_sentence}."
+    Slack.notify "Build of #{app.name} released to #{device_count} #{"device".pluralize device_count} in #{deploy.timeslot.prefixes.to_sentence}."
     deploy.successful!
   end
 end
