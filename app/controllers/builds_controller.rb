@@ -1,3 +1,4 @@
+# Displays the latest build and shows a form to create new ones.
 class BuildsController < ApplicationController
   before_action :require_authentication
   before_action :set_build, only: %i[show edit]
