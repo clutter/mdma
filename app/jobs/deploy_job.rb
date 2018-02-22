@@ -6,8 +6,8 @@ class DeployJob < ActiveJob::Base
 
   def perform(deploy)
     upload_file deploy
-    uploaded_devices = push_to_devices deploy
-    message = "Build of #{app.name} released to "
+    device_count = push_to_devices deploy
+    message = "Build of #{app.name} released to #{device_count} #{'device'.pluralize device_count}"
     message << "#{uploaded_devices} in #{deploy.timeslot.prefixes.to_sentence}."
     Slack.notify message
     deploy.successful!
@@ -27,16 +27,21 @@ private
   end
 
   def push_to_devices(deploy)
-    app_group = SimpleMDM::AppGroup.find(7_017)
     device_count = 0
-
     SimpleMDM::Device.all.each do |device|
-      next unless deploy.includes_device_named?(device.device_name)
-      next unless device.device_group_id.in?(app_group.device_group_ids)
+      next unless should_push?(deploy, device)
       device.push_apps
       device.refresh
       device_count += 1
     end
-    "#{device_count} #{'device'.pluralize device_count}"
+    device_count
+  end
+
+  def app_group
+    @app_group ||= SimpleMDM::AppGroup.find(7_017)
+  end
+
+  def should_push?(deploy, device)
+    deploy.includes_device_named?(device.device_name) && device.device_group_id.in?(app_group.device_group_ids)
   end
 end
