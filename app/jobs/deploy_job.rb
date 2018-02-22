@@ -5,6 +5,17 @@ class DeployJob < ActiveJob::Base
   queue_as :default
 
   def perform(deploy)
+    upload_file deploy
+    uploaded_devices = push_to_devices deploy
+    message = "Build of #{app.name} released to "
+    message << "#{uploaded_devices} in #{deploy.timeslot.prefixes.to_sentence}."
+    Slack.notify message
+    deploy.successful!
+  end
+
+private
+
+  def upload_file(deploy)
     app = SimpleMDM::App.find(16_714)
     Slack.notify "Build of #{app.name} started."
     deploy.running!
@@ -13,7 +24,9 @@ class DeployJob < ActiveJob::Base
     file.write deploy.build.package.download
     app.binary = file.open
     app.save
+  end
 
+  def push_to_devices(deploy)
     app_group = SimpleMDM::AppGroup.find(7_017)
     device_count = 0
 
@@ -24,9 +37,6 @@ class DeployJob < ActiveJob::Base
       device.refresh
       device_count += 1
     end
-
-    devices = "#{device_count} #{'device'.pluralize device_count}"
-    Slack.notify "Build of #{app.name} released to #{devices} in #{deploy.timeslot.prefixes.to_sentence}."
-    deploy.successful!
+    "#{device_count} #{'device'.pluralize device_count}"
   end
 end
