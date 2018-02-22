@@ -6,8 +6,7 @@ class BuildsController < ApplicationController
     @builds = Build.with_attached_package.includes(deploys: :timeslot).order(deploy_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @build = Build.new deploy_time: Time.strptime('22:30', '%H:%M')

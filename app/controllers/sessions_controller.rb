@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def auth
     auth = Yt::Auth.create redirect_uri: auth_sessions_url, code: params[:code]
