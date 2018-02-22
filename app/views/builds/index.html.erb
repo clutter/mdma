@@ -15,22 +15,9 @@
           on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>
         <td><%= link_to "Download", rails_blob_url(build.package, disposition: "attachment") %></td>
-        <!-- <td>Cancel</td>add icons -->
       </tr>
       <% build.deploys.each do |deploy| %>
-        <tr class="<%=
-          if deploy.enqueued?
-            'table-warning'
-          elsif deploy.successful?
-            'table-success'
-          elsif deploy.failed?
-            'table-danger'
-          elsif deploy.scheduled?
-            'table-active'
-          elsif deploy.running?
-            'table-primary'
-          end
-         %>">
+        <tr class="<%= table_class_for(deploy) %>">
           <td></td>
           <td>
             after <%= pluralize deploy.timeslot.delay_in_hours, 'hour' %>

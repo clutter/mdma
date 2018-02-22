@@ -16,7 +16,7 @@ private
   def update_current_devices
     app_devices.each do |device|
       app = device.installed_apps.find do |application|
-        application['identifier'] == 'com.clutter.scan-wms'
+        application['identifier'] == ENV['MDMA_APP_IDENTIFIER']
       end
 
       device = Device.find_or_initialize_by name: device.name
@@ -27,7 +27,7 @@ private
 
   def app_devices
     @app_devices ||= begin
-      app_group = SimpleMDM::AppGroup.find 7017
+      app_group = SimpleMDM::AppGroup.find ENV['MDMA_APP_GROUP_ID']
       SimpleMDM::Device.all.select do |device|
         device.device_group_id.in? app_group.device_group_ids
       end

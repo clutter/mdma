@@ -16,7 +16,7 @@ class DeployJob < ActiveJob::Base
 private
 
   def upload_file(deploy)
-    app = SimpleMDM::App.find(16_714)
+    app = SimpleMDM::App.find(ENV['MDMA_APP_ID'])
     Slack.notify "Build of #{app.name} started."
     deploy.running!
 
@@ -38,7 +38,7 @@ private
   end
 
   def app_group
-    @app_group ||= SimpleMDM::AppGroup.find(7_017)
+    @app_group ||= SimpleMDM::AppGroup.find(ENV['MDMA_APP_GROUP_ID'])
   end
 
   def should_push?(deploy, device)
