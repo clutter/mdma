@@ -1,3 +1,4 @@
+# A single deploy sends a build to the devices included in a timeslot.
 class Deploy < ActiveRecord::Base
   belongs_to :build
   belongs_to :timeslot

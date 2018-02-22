@@ -1,3 +1,4 @@
+# A single build includes the package file to send to the devices.
 class Build < ActiveRecord::Base
   has_one_attached :package
   validates :package_attachment, presence: true
