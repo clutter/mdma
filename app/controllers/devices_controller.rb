@@ -1,3 +1,4 @@
+# Displays the devices with the app installed.
 class DevicesController < ApplicationController
   before_action :require_authentication
 
