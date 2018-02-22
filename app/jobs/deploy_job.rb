@@ -1,5 +1,6 @@
 require 'slack'
 
+# Uploads a new binary to SimpleMDM to push to the appropriate devices.
 class DeployJob < ActiveJob::Base
   queue_as :default
 
