@@ -8,23 +8,8 @@ class Build < ActiveRecord::Base
   attr_accessor :deploy_date, :deploy_time
   validates :deploy_date, :deploy_time, presence: true, on: :create
   validate on: :create do
-    begin
-      self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'
-      if deploy_date < Time.zone.today
-        errors.add :deploy_date, 'must be in the future'
-      end
-    rescue ArgumentError
-      errors.add :deploy_date, 'has an invalid format'
-    end if deploy_date.present?
-
-    begin
-      self.deploy_time = Time.zone.strptime deploy_time, '%H:%M'
-      if deploy_date == Time.zone.today && deploy_time < Time.zone.now
-        errors.add :deploy_time, 'must be in the future'
-      end
-    rescue ArgumentError
-      errors.add :deploy_time, 'has an invalid format'
-    end if deploy_time.present?
+    validate_future_date if deploy_date.present?
+    validate_future_time if deploy_time.present?
   end
 
   before_create do
@@ -33,5 +18,25 @@ class Build < ActiveRecord::Base
 
   before_create do
     self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
+  end
+  
+private
+
+  def validate_future_date
+    self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'
+    if deploy_date < Time.zone.today
+      errors.add :deploy_date, 'must be in the future'
+    end
+  rescue ArgumentError
+    errors.add :deploy_date, 'has an invalid format'
+  end
+
+  def validate_future_time
+    self.deploy_time = Time.zone.strptime deploy_time, '%H:%M'
+    if deploy_date == Time.zone.today && deploy_time < Time.zone.now
+      errors.add :deploy_time, 'must be in the future'
+    end
+  rescue ArgumentError
+    errors.add :deploy_time, 'has an invalid format'
   end
 end
