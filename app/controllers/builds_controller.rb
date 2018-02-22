@@ -1,6 +1,6 @@
 class BuildsController < ApplicationController
   before_action :require_authentication
-  before_action :set_build, only: %i[show, edit]
+  before_action :set_build, only: %i[show edit]
 
   def index
     @builds = Build.with_attached_package.includes(deploys: :timeslot).order(deploy_at: :desc)
