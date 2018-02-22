@@ -10,7 +10,7 @@
     <% @timeslots.each do |timeslot| %>
       <tr>
         <th scope="row"><%= timeslot.delay_in_hours %></th>
-        <td><%= timeslot.prefixes.sort.join ' ' %></td>
+        <td><%= prefixes_for timeslot %></td>
       </tr>
     <% end %>
   </tbody>

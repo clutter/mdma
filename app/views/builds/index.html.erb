@@ -21,7 +21,7 @@
           <td></td>
           <td>
             after <%= pluralize deploy.timeslot.delay_in_hours, 'hour' %>
-            for <%= deploy.timeslot.prefixes.to_sentence.presence || 'all' %> devices
+            for <%= prefixes_for deploy.timeslot %> devices
           </td>
           <td><%= deploy.status %></td>
         </tr>
