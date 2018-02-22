@@ -10,7 +10,7 @@ class Build < ActiveRecord::Base
   validate on: :create do
     begin
       self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'
-      if self.deploy_date < Time.zone.today
+      if deploy_date < Time.zone.today
         errors.add :deploy_date, 'must be in the future'
       end
     rescue ArgumentError
@@ -19,7 +19,7 @@ class Build < ActiveRecord::Base
 
     begin
       self.deploy_time = Time.zone.strptime deploy_time, '%H:%M'
-      if self.deploy_date == Time.zone.today && self.deploy_time < Time.zone.now
+      if deploy_date == Time.zone.today && deploy_time < Time.zone.now
         errors.add :deploy_time, 'must be in the future'
       end
     rescue ArgumentError
