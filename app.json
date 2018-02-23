@@ -1,0 +1,33 @@
+{
+  "name": "mdma",
+  "scripts": {},
+  "env": {
+    "MDMA_APP_GROUP_ID": "21708",
+    "MDMA_APP_ID": "55475",
+    "MDMA_APP_IDENTIFIER": "com.clutter.UglySweater",
+    "RAILS_MASTER_KEY": {
+      "required": true
+    },
+    "REDIS_PROVIDER": {
+      "required": true
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1
+    },
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "logentries",
+    "heroku-postgresql",
+    "heroku-redis"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
