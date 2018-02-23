@@ -17,6 +17,12 @@ class Deploy < ActiveRecord::Base
     build.deploy_at + timeslot.delay_in_hours.hours
   end
 
+  def self.enqueue_pending
+    with_associations.scheduled.find_each do |deploy|
+      deploy.enqueue if deploy.timestamp < 20.minutes.from_now
+    end
+  end
+
   def enqueue
     DeployJob.set(wait_until: timestamp).perform_later self
     enqueued!
