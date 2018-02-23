@@ -7,16 +7,18 @@ class DeployJob < ActiveJob::Base
   def perform(deploy)
     upload_file deploy
     device_count = push_to_devices deploy
-    message = "Build of #{app.name} released to #{device_count} #{'device'.pluralize device_count}"
-    message << "#{uploaded_devices} in #{deploy.timeslot.prefixes.to_sentence}."
+    slots = deploy.timeslot.prefixes.to_sentence
+    message = "Build of #{app.name} released to #{device_count} #{'device'.pluralize device_count} in #{slots}."
     Slack.notify message
     deploy.successful!
+  rescue StandardError
+    deploy.failed!
+    raise
   end
 
 private
 
   def upload_file(deploy)
-    app = SimpleMDM::App.find(ENV['MDMA_APP_ID'])
     Slack.notify "Build of #{app.name} started."
     deploy.running!
 
@@ -35,6 +37,10 @@ private
       device_count += 1
     end
     device_count
+  end
+
+  def app
+    @app ||= SimpleMDM::App.find(ENV['MDMA_APP_ID'])
   end
 
   def app_group
