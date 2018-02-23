@@ -1,3 +1,4 @@
+# Methods related to the navigation menu
 module MenuHelper
   def nav_link_to(name, url, icon:)
     active = current_page?(url)
@@ -8,6 +9,13 @@ module MenuHelper
       link_to url, class: 'nav-link' do
         safe_join [fa_icon, name, indicator].compact, ' '
       end
+    end
+  end
+
+  def refresh_button_to(name, url)
+    icon = tag.i class: 'fas fa-sync fa-sm'
+    button_to url, form_class: 'form-inline ml-1', class: 'btn btn-outline-secondary btn-sm' do
+      safe_join [icon, name], ' '
     end
   end
 end

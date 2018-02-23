@@ -1,0 +1,27 @@
+AllCops:
+  TargetRubyVersion: '2.5.0'
+  Exclude:
+    - db/schema.rb
+    - config/**/*
+    - bin/*
+    - Rakefile
+
+Bundler/OrderedGems:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Exclude:
+    - db/migrate/*.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*.rb
+
+Metrics/LineLength:
+  Max: 120
+
+Layout/AccessModifierIndentation:
+  EnforcedStyle: outdent

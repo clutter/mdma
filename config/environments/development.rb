@@ -12,6 +12,9 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Use a real queuing backend for Active Job (and separate queues per environment)
+  config.active_job.queue_adapter     = :sidekiq
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp/caching-dev.txt').exist?
@@ -55,4 +58,9 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  # Test app for development
+  ENV['MDMA_APP_GROUP_ID'] = '21708'
+  ENV['MDMA_APP_ID'] = '55475'
+  ENV['MDMA_APP_IDENTIFIER'] = 'com.clutter.UglySweater'
 end

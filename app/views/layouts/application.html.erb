@@ -18,14 +18,13 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
       <span class="navbar-brand">mdma</span>
       <% if logged_in? %>
-      <div>
         <ul class="navbar-nav mr-auto">
           <%= nav_link_to 'Show builds', root_path, icon: 'archive' %>
           <%= nav_link_to 'Show devices', devices_path, icon: 'mobile' %>
           <%= nav_link_to 'Show timeslots', timeslots_path, icon: 'clock' %>
           <%= nav_link_to 'Upload new build', new_build_path, icon: 'cloud-upload-alt' %>
         </ul>
-      </div>
+        <%= yield :refresh %>
       <% end %>
     </nav>
     <%= yield %>

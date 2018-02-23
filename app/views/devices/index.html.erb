@@ -1,13 +1,9 @@
+<% content_for(:refresh) { refresh_button_to 'Refresh devices', fetches_path } %>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col" class='align-top'>Version</th>
-      <th scope="col">
-        Devices
-        <%= button_to fetches_path, form_class: 'float-right', class: 'btn btn-secondary btn-sm' do %>
-        <i class="fas fa-sync fa-sm"></i> Refresh devices
-        <% end %>
-      </th>
+      <th scope="col">Version</th>
+      <th scope="col">Devices</th>
     </tr>
   </thead>
 
