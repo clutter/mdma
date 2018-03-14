@@ -2,7 +2,7 @@
 <table class="table table-sm">
   <thead>
     <tr>
-      <th>ID</th>
+      <th>Version</th>
       <th>Deploy</th>
       <th>Actions</th>
     </tr>
@@ -11,7 +11,7 @@
   <tbody>
     <% @builds.each do |build| %>
       <tr class="table-default">
-        <td><%= build.id %></td>
+        <td><%= build.version %></td>
         <td>
           on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>

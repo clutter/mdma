@@ -11,8 +11,17 @@
     </div>
   <% end %>
 
-  <%= fieldset "2. Select a date and time to deploy in #{Time.zone.name}" do %>
+  <%= fieldset "2. Indicate a version, date, and time to deploy in #{Time.zone.name}" do %>
     <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :version, class: 'sr-only' %>
+        <% if @build.errors[:version].any? %>
+          <%= form.number_field :version, class: 'form-control is-invalid', placeholder: 'Version number' %>
+          <div class="invalid-feedback"><%= @build.errors.full_messages_for(:version).to_sentence %>.</div>
+        <% else %>
+          <%= form.number_field :version, class: 'form-control', placeholder: 'Version number' %>
+        <% end %>
+      </div>
       <div class="form-group col-md-4">
         <%= form.label :deploy_date, class: 'sr-only' %>
         <% if @build.errors[:deploy_date].any? %>
@@ -23,8 +32,8 @@
         <% end %>
       </div>
       <div class="form-group col-md-4">
+        <%= form.label :deploy_time, class: 'sr-only' %>
         <% if @build.errors[:deploy_time].any? %>
-          <%= form.label :deploy_time, class: 'sr-only' %>
           <%= form.time_field :deploy_time, class: 'form-control is-invalid' %>
           <div class="invalid-feedback"><%= @build.errors.full_messages_for(:deploy_time).to_sentence %>.</div>
         <% else %>

@@ -30,6 +30,6 @@ private
   end
 
   def build_params
-    params.require(:build).permit :deploy_date, :deploy_time, :package
+    params.require(:build).permit :version, :deploy_date, :deploy_time, :package
   end
 end
