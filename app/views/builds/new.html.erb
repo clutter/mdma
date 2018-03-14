@@ -1,7 +1,5 @@
 <%= form_with(model: @build) do |form| %>
-  <hr />
-  <fieldset>
-    <legend>1. Select a file to upload:</legend>
+  <%= fieldset '1. Select a file to upload' do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
       <% if @build.errors[:package_attachment].any? %>
@@ -11,11 +9,9 @@
         <%= form.file_field :package, class: 'form-control-file form-control' %>
       <% end %>
     </div>
-  </fieldset>
+  <% end %>
 
-  <hr />
-  <fieldset>
-    <legend>2. Select a date and time to deploy in <%= Time.zone.name %>:</legend>
+  <%= fieldset "2. Select a date and time to deploy in #{Time.zone.name}" do %>
     <div class="form-row">
       <div class="form-group col-md-4">
         <%= form.label :deploy_date, class: 'sr-only' %>
@@ -36,7 +32,7 @@
         <% end %>
       </div>
     </div>
-  </fieldset>
+  <% end %>
 
   <hr />
   <button type="submit" class="btn btn-primary">Upload and deploy</button>
