@@ -15,6 +15,8 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   config.active_job.queue_adapter     = :sidekiq
 
+  config.active_record.verbose_query_logs = true
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp/caching-dev.txt').exist?
