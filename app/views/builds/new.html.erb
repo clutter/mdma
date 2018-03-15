@@ -1,7 +1,5 @@
 <%= form_with(model: @build) do |form| %>
-  <hr />
-  <fieldset>
-    <legend>1. Select a file to upload:</legend>
+  <%= fieldset '1. Select a file to upload' do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
       <% if @build.errors[:package_attachment].any? %>
@@ -11,12 +9,19 @@
         <%= form.file_field :package, class: 'form-control-file form-control' %>
       <% end %>
     </div>
-  </fieldset>
+  <% end %>
 
-  <hr />
-  <fieldset>
-    <legend>2. Select a date and time to deploy in <%= Time.zone.name %>:</legend>
+  <%= fieldset "2. Indicate a version, date, and time to deploy in #{Time.zone.name}" do %>
     <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :version, class: 'sr-only' %>
+        <% if @build.errors[:version].any? %>
+          <%= form.number_field :version, class: 'form-control is-invalid', placeholder: 'Version number' %>
+          <div class="invalid-feedback"><%= @build.errors.full_messages_for(:version).to_sentence %>.</div>
+        <% else %>
+          <%= form.number_field :version, class: 'form-control', placeholder: 'Version number' %>
+        <% end %>
+      </div>
       <div class="form-group col-md-4">
         <%= form.label :deploy_date, class: 'sr-only' %>
         <% if @build.errors[:deploy_date].any? %>
@@ -27,8 +32,8 @@
         <% end %>
       </div>
       <div class="form-group col-md-4">
+        <%= form.label :deploy_time, class: 'sr-only' %>
         <% if @build.errors[:deploy_time].any? %>
-          <%= form.label :deploy_time, class: 'sr-only' %>
           <%= form.time_field :deploy_time, class: 'form-control is-invalid' %>
           <div class="invalid-feedback"><%= @build.errors.full_messages_for(:deploy_time).to_sentence %>.</div>
         <% else %>
@@ -36,7 +41,7 @@
         <% end %>
       </div>
     </div>
-  </fieldset>
+  <% end %>
 
   <hr />
   <button type="submit" class="btn btn-primary">Upload and deploy</button>

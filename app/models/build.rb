@@ -6,7 +6,8 @@ class Build < ActiveRecord::Base
   has_many :deploys, dependent: :destroy
 
   attr_accessor :deploy_date, :deploy_time
-  validates :deploy_date, :deploy_time, presence: true, on: :create
+  validates :version, :deploy_date, :deploy_time, presence: true, on: :create
+  validates :version, uniqueness: true
   validate on: :create do
     validate_future_date if deploy_date.present?
     validate_future_time if deploy_date == Time.zone.today && deploy_time.present?
