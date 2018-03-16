@@ -62,6 +62,10 @@ google:
   client_id: "[Google app Client ID to log into the app]"
   client_secret: "[Google app Client Secret to log into the app]"
 
+github:
+  username: "[Username of a GitHub account with read access to clutter/clutter-ios-wms]"
+  token: "[Personal access token for the account to read the releases for that app]"
+
 slack:
   token_url: "[Slack token URL to send build notifications to Slack]"
 ```

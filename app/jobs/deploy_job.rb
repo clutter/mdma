@@ -7,9 +7,7 @@ class DeployJob < ActiveJob::Base
   def perform(deploy)
     upload_file deploy
     device_count = push_to_devices deploy
-    slots = deploy.timeslot.prefixes.to_sentence
-    message = "Build of #{app.name} released to #{device_count} #{'device'.pluralize device_count} in #{slots}."
-    Slack.notify message
+    notify_slack deploy, device_count
     deploy.successful!
   rescue StandardError
     deploy.failed!
@@ -19,7 +17,6 @@ class DeployJob < ActiveJob::Base
 private
 
   def upload_file(deploy)
-    Slack.notify "Build of #{app.name} started."
     deploy.running!
 
     file = Tempfile.open ['package', '.ipa'], encoding: 'ASCII-8BIT'
@@ -37,6 +34,26 @@ private
       device_count += 1
     end
     device_count
+  end
+
+  def notify_slack(deploy, device_count)
+    slots = deploy.timeslot.prefixes.to_sentence
+    app_name = "#{app.name} (#{deploy.build.version})"
+    Slack.notify "#{app_name} released to #{device_count} #{'device'.pluralize device_count} in #{slots}."
+    if deploy.first?
+      notes = fetch_notes(deploy)
+      Slack.notify notes if notes.present?
+    end
+  end
+
+  def fetch_notes(deploy)
+    github_username = Rails.application.credentials.dig :github, :username
+    github_token = Rails.application.credentials.dig :github, :token
+    url = "api.github.com/repos/clutter/clutter-ios-wms/releases/tags/#{deploy.build.version}"
+    response = RestClient.get "https://#{github_username}:#{github_token}@#{url}"
+    JSON(response.body)['body'] if response.code == 200
+  rescue RestClient::Exception => error
+    Honeybadger.notify "Release #{deploy.build.version} was not found on GitHub (#{error})"
   end
 
   def app
