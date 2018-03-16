@@ -4,6 +4,8 @@ require 'rest-client'
 class Slack
   def self.notify(message)
     credentials = Rails.application.credentials.dig(:slack, :token_url)
-    RestClient.post credentials, { 'text' => message }.to_json, content_type: :json, accept: :json
+    payload = { 'text' => message }
+    payload['channel'] = ENV['SLACK_CHANNEL'] if ENV['SLACK_CHANNEL'].present?
+    RestClient.post credentials, payload.to_json, content_type: :json, accept: :json
   end
 end

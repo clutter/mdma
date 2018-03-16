@@ -48,7 +48,11 @@ In order to use `mdma`, the following environment variables need to be set:
 - `MDMA_APP_IDENTIFIER`: The unique identifier of the iOS app
 - `RAILS_MASTER_KEY`: The key to decrypt the credentials stored in `config/credentials.yml.enc`
 
-For completeness, these are the credentials stored in the app
+The following environment variables are optional:
+
+- `SLACK_CHANNEL`: The Slack channel to post notifications to (defaults to #deploys)
+
+For completeness, these are the credentials stored in the app:
 
 ```yaml
 aws:
