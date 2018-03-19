@@ -9,9 +9,9 @@ class DeployJob < ActiveJob::Base
     device_count = push_to_devices deploy
     notify_slack deploy, device_count
     deploy.successful!
-  rescue StandardError
+  rescue StandardError => error
+    Honeybadger.notify "Release #{deploy.build.version} failed (#{error})"
     deploy.failed!
-    raise
   end
 
 private
