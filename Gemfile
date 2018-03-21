@@ -12,6 +12,14 @@ gem 'yt-auth', '~> 0.3.1'                  # Authenticate with Google
 gem 'simplemdm', '~> 1.3'                  # Connect to SimpleMDM API
 gem 'honeybadger', '~> 3.1'                # Log errors
 
-group :development do
-  gem 'pry-nav', '~> 0.2.4'                # Debugger with 'next' option
+group :development, :test do
+  gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
+end
+
+group :test do
+  gem 'rspec-rails', '>= 3.7', '< 4.0'     # Testing framework
+  gem 'capybara', '>= 2.15', '< 4.0'       # Runs system tests
+  gem 'selenium-webdriver'                 # Runs system tests
+  gem 'chromedriver-helper'                # Runs system tests in Chrome
+  gem 'simplecov'                          # Measure code coverage
 end
