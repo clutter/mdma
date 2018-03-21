@@ -10,7 +10,7 @@ class Build < ActiveRecord::Base
   validates :version, uniqueness: true
   validate on: :create do
     validate_future_date if deploy_date.present?
-    validate_future_time if deploy_date == Time.zone.today && deploy_time.present?
+    validate_future_time if deploy_time.present?
   end
 
   before_create do
@@ -32,7 +32,7 @@ private
 
   def validate_future_time
     self.deploy_time = Time.zone.strptime deploy_time, '%H:%M'
-    errors.add :deploy_time, 'must be in the future' if deploy_time < Time.zone.now
+    errors.add :deploy_time, 'must be in the future' if deploy_date == Time.zone.today && deploy_time < Time.zone.now
   rescue ArgumentError
     errors.add :deploy_time, 'has an invalid format'
   end
