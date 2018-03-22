@@ -9,9 +9,8 @@ class DeployJob < ActiveJob::Base
     device_count = push_to_devices deploy
     notify_slack deploy, device_count
     deploy.successful!
-  rescue StandardError => error
-    Honeybadger.notify "Release #{deploy.build.version} failed (#{error})"
-    deploy.failed!
+  rescue *connection_errors => error
+    perform_again deploy, error
   end
 
 private
@@ -34,6 +33,28 @@ private
       device_count += 1
     end
     device_count
+  end
+
+  # Sleeps for a while and retries twice, in case a connection error has occurred.
+  def perform_again(deploy, error)
+    @retries_so_far ||= -1
+    @retries_so_far += 1
+    if @retries_so_far < 2
+      Rails.logger.info "Retry #{@retries_so_far} after #{error}"
+      sleep 3 + (5 * @retries_so_far)
+      perform deploy
+    else
+      Honeybadger.notify "Release #{deploy.build.version} failed (#{error})"
+      deploy.failed!
+    end
+  end
+
+  # Returns a list of connection errors worth retrying at least once.
+  def connection_errors
+    [
+      OpenSSL::SSL::SSLError, Errno::ETIMEDOUT, Errno::EHOSTUNREACH, Errno::ENETUNREACH, Errno::ECONNRESET,
+      SocketError, Net::OpenTimeout, Net::HTTPServerError, OpenSSL::SSL::SSLErrorWaitReadable, RestClient::Exception
+    ]
   end
 
   def notify_slack(deploy, device_count)
