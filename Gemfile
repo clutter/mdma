@@ -14,6 +14,7 @@ gem 'honeybadger', '~> 3.1'                # Log errors
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
+  gem 'spring'                             # Speed up local development
 end
 
 group :test do
