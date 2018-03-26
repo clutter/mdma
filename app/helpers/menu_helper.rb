@@ -13,9 +13,9 @@ module MenuHelper
   end
 
   def refresh_button_to(name, url)
-    icon = tag.i class: 'fas fa-sync fa-sm'
+    icon = tag.i class: 'fas fa-sync fa-sm mr-1'
     button_to url, form_class: 'form-inline ml-1', class: 'btn btn-outline-secondary btn-sm' do
-      safe_join [icon, name], ' '
+      safe_join [icon, name]
     end
   end
 end
