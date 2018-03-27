@@ -10,7 +10,7 @@ RSpec.describe 'Uploading a build', :logged_in do
     click_on 'Upload and deploy'
 
     expect(page).to have_text(version)
-    expect(page).to have_text('on Thursday, March 12, 2020 at 10:30PM PDT')
+    expect(page).to have_text('on Thursday, March 12, 2020 at 8:00PM PDT')
   end
 
   specify 'with invalid data, displays errors' do
