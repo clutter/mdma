@@ -31,6 +31,7 @@ How it works
 The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 10 minutes.
 `bundle exec rake deploys:enqueue` checks whether any build needs to be deployed soon and adds to the queue.
 
+
 How to contribute
 =================
 
