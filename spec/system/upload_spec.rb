@@ -6,7 +6,7 @@ RSpec.describe 'Uploading a build', :logged_in do
   specify 'with valid data, displays the build' do
     attach_file 'Choose the .ipa package for this build:', local_file
     fill_in 'Version', with: version
-    fill_in 'Deploy date', with: '03/12/2020'
+    fill_in 'Deploy date', with: Date.parse('2020-03-12')
     click_on 'Upload and deploy'
 
     expect(page).to have_text(version)
