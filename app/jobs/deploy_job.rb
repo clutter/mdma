@@ -86,6 +86,8 @@ private
   end
 
   def should_push?(deploy, device)
-    deploy.includes_device_named?(device.device_name) && device.device_group_id.in?(app_group.device_group_ids)
+    deploy.includes_device_named?(device.device_name) &&
+      device.device_group_id.in?(app_group.device_group_ids) &&
+      device.status == 'enrolled'
   end
 end
