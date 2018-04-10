@@ -44,7 +44,7 @@ private
       sleep 3 + (5 * @retries_so_far)
       perform deploy
     else
-      Honeybadger.notify "Release #{deploy.build.version} failed (#{error})"
+      Honeybadger.notify "Release #{deploy.build.version} failed (#{error}: #{error.try(:http_body)})"
       deploy.failed!
     end
   end
@@ -86,6 +86,8 @@ private
   end
 
   def should_push?(deploy, device)
-    deploy.includes_device_named?(device.device_name) && device.device_group_id.in?(app_group.device_group_ids)
+    deploy.includes_device_named?(device.device_name) &&
+      device.device_group_id.in?(app_group.device_group_ids) &&
+      device.status == 'enrolled'
   end
 end
