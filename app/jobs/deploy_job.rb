@@ -44,7 +44,7 @@ private
       sleep 3 + (5 * @retries_so_far)
       perform deploy
     else
-      Honeybadger.notify "Release #{deploy.build.version} failed (#{error})"
+      Honeybadger.notify "Release #{deploy.build.version} failed (#{error}: #{error.try(:http_body)})"
       deploy.failed!
     end
   end
