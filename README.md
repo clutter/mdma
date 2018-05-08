@@ -31,6 +31,16 @@ How it works
 The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 10 minutes.
 `bundle exec rake deploys:enqueue` checks whether any build needs to be deployed soon and adds to the queue.
 
+How to delete a build
+=====================
+
+If you have enqueued a build and you have changed your mind, run this command at least 10 minutes
+before the scheduled time:
+
+```
+heroku run rails runner 'Build.last.destroy'
+```
+
 How to contribute
 =================
 
