@@ -16,7 +16,9 @@
           </span>
         </th>
         <td>
-          <%= devices.map(&:name).sort.join ' ' %>
+          <% devices.map(&:short_name).sort.each do |short_name| %>
+            <span class="badge badge-light"><%= short_name %></span>
+          <% end %>
         </td>
       </tr>
     <% end %>
