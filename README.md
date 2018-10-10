@@ -5,7 +5,7 @@ Mdma helps you deploy an iOS app to many devices at scheduled times with [Simple
 
 The **source code** is available on [GitHub](https://github.com/clutter/mdma).
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/62f8c7fe461eead4c44f/maintainability)](https://codeclimate.com/repos/5a8e076bc145340270009815/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eac591ba7b06c98080dc/maintainability)](https://codeclimate.com/github/clutter/mdma/maintainability)
 
 After [setting up the right groups on SimpleMDM](#setup), you can do the following:
 
