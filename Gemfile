@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.5.0'
 
-gem 'rails', '~> 5.2.0'                    # Rails framework
+gem 'rails', '~> 5.2.1'                    # Rails framework
 gem 'pg', '~> 0.18'                        # Database for Active Record
 gem 'sidekiq', '~> 5.0'                    # Background processor
 gem 'puma', '~> 3.11'                      # Fast and concurrent web server
