@@ -33,6 +33,9 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Transform perform_later to perform_now when testing
+  config.active_job.queue_adapter     = :inline
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
@@ -43,4 +46,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Test app for test
+  ENV['MDMA_APP_GROUP_ID'] = '21708'
 end
