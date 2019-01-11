@@ -1,6 +1,7 @@
 # A single build includes the package file to send to the devices.
 class Build < ActiveRecord::Base
   has_one_attached :package
+  has_one_attached :manifest
   validates :package_attachment, presence: true
 
   has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
@@ -19,6 +20,10 @@ class Build < ActiveRecord::Base
 
   before_create do
     self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
+  end
+
+  after_create_commit do
+    GenerateManifestJob.perform_later self
   end
 
 private
