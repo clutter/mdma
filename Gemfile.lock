@@ -92,7 +92,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.4.6)
-    honeybadger (4.1.0)
+    honeybadger (4.2.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (1.1.1)
@@ -233,7 +233,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
-  honeybadger (~> 4.1)
+  honeybadger (~> 4.2)
   pg (~> 0.18)
   pry-byebug (~> 3.6)
   puma (~> 3.12)

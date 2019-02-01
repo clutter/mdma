@@ -10,7 +10,7 @@ gem 'bootsnap', '>= 1.1.0', require: false # Speed up Rails boot time
 gem 'aws-sdk-s3', '~> 1.23', require: false # Upload files to S3
 gem 'yt-auth', '~> 0.3.1'                  # Authenticate with Google
 gem 'simplemdm', '~> 1.3'                  # Connect to SimpleMDM API
-gem 'honeybadger', '~> 4.1'                # Log errors
+gem 'honeybadger', '~> 4.2'                # Log errors
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
