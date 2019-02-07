@@ -11,6 +11,8 @@ gem 'aws-sdk-s3', '~> 1.23', require: false # Upload files to S3
 gem 'yt-auth', '~> 0.3.1'                  # Authenticate with Google
 gem 'simplemdm', '~> 1.3'                  # Connect to SimpleMDM API
 gem 'honeybadger', '~> 4.1'                # Log errors
+gem 'rubyzip'                              # Extract Info.plist from build package
+gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option

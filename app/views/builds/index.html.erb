@@ -15,7 +15,11 @@
         <td>
           on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>
-        <td><%= link_to "Download", rails_blob_url(build.package, disposition: "attachment") %></td>
+        <% if build.manifest.attached? %>
+        <td><%= link_to 'Install', manifest_url(build.manifest) %></td>
+        <% else %>
+        <td><%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %></td>
+        <% end %>
       </tr>
       <% build.deploys.each do |deploy| %>
         <tr class="<%= table_class_for(deploy) %>">
