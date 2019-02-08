@@ -12,7 +12,8 @@
       <tr>
         <th scope="row">
           <span style="white-space: nowrap">
-            <%= pluralize devices.count, 'device' %> on version <%= version %>
+            <%= pluralize devices.count, 'device' %>
+            <%= version ? "on version #{version}" : "with no app" %>
           </span>
         </th>
         <td>
