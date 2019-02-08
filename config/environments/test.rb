@@ -48,5 +48,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Test app for test
-  ENV['MDMA_APP_GROUP_ID'] = '21708'
+  ENV['MDMA_APP_GROUP_ID'] = '21707'
 end
