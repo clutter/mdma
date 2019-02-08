@@ -65,6 +65,11 @@ private
   end
 
   def package_url
-    CGI::escapeHTML @build.package.blob.service_url(expires_in: 1.week)
+    ActiveStorage::Current.host = 'localhost:3000' if local?
+    CGI.escapeHTML @build.package.blob.service_url(expires_in: 1.week)
+  end
+
+  def local?
+    Rails.application.config.active_storage.service.in? %i[local test]
   end
 end
