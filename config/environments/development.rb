@@ -62,7 +62,7 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Test app for development
-  ENV['MDMA_APP_GROUP_ID'] = '21708'
-  ENV['MDMA_APP_ID'] = '55475'
+  ENV['MDMA_APP_GROUP_ID'] = '21707'
+  ENV['MDMA_APP_ID'] = '91051'
   ENV['MDMA_APP_IDENTIFIER'] = 'com.clutter.UglySweater'
 end

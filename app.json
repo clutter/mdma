@@ -4,8 +4,8 @@
     "postdeploy": "bundle exec rails db:migrate && bundle exec rails r 'Timeslot.create! if Timeslot.none?'"
   },
   "env": {
-    "MDMA_APP_GROUP_ID": "21708",
-    "MDMA_APP_ID": "55475",
+    "MDMA_APP_GROUP_ID": "21707",
+    "MDMA_APP_ID": "91051",
     "MDMA_APP_IDENTIFIER": "com.clutter.UglySweater",
     "RAILS_MASTER_KEY": {
       "required": true
