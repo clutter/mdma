@@ -1,7 +1,7 @@
 require 'zip'
 require 'zip/filesystem'
 
-class InfoPlistAnalyzer < ActiveStorage::Analyzer
+class PackageAnalyzer < ActiveStorage::Analyzer
   def metadata
     read_info_plist do |info_plist|
       return {} unless info_plist

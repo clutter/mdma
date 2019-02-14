@@ -4,7 +4,7 @@ class GenerateManifestJob < ActiveJob::Base
 
   def perform(build)
     @build = build
-    @info_plist = InfoPlistAnalyzer.new(@build.package.blob).metadata
+    @info_plist = PackageAnalyzer.new(@build.package.blob).metadata
 
     return if @info_plist.empty?
 
