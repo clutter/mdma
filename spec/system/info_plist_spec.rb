@@ -1,5 +1,5 @@
 # Adapted from https://github.com/soulchild/antenna/blob/master/spec/infoplist_spec.rb
-describe InfoPlist do
+RSpec.describe InfoPlist do
   before(:example, legacy: false) do
     @info_plist = InfoPlist.new File.read(Rails.root.join(file_fixture('Info.plist')))
   end
