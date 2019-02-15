@@ -11,6 +11,7 @@ RSpec.describe 'Uploading a build', :logged_in do
 
     expect(page).to have_text(version)
     expect(page).to have_text('on Thursday, March 12, 2020 at 8:00PM PDT')
+    expect(page).to have_link('Install')
   end
 
   specify 'with invalid data, displays errors' do
