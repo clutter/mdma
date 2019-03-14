@@ -15,7 +15,7 @@ gem 'rubyzip'                              # Extract Info.plist from build packa
 gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 
 group :development, :test do
-  gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
+  gem 'pry-byebug', '~> 3.7'               # Debugger with 'next' option
   gem 'spring'                             # Speed up local development
 end
 
