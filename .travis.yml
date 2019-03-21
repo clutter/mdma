@@ -1,7 +1,9 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.5.0
+  - 2.5.5
+before_install:
+  - gem install bundler -v 1.16.5
 before_script:
   - psql -c 'create database mdma_test;' -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
