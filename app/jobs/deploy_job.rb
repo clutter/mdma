@@ -62,7 +62,7 @@ private
     app_name = "#{app.name} (#{deploy.build.version})"
     Slack.notify "#{app_name} released to #{device_count} #{'device'.pluralize device_count} in #{slots}."
     if deploy.first?
-      notes = fetch_notes(deploy)
+      notes = fetch_notes(deploy) if github_project.present?
       Slack.notify notes if notes.present?
     end
   end
@@ -70,11 +70,15 @@ private
   def fetch_notes(deploy)
     github_username = Rails.application.credentials.dig :github, :username
     github_token = Rails.application.credentials.dig :github, :token
-    url = "api.github.com/repos/clutter/clutter-ios-wms/releases/tags/#{deploy.build.version}"
+    url = "api.github.com/repos/#{github_project}/releases/tags/#{deploy.build.version}"
     response = RestClient.get "https://#{github_username}:#{github_token}@#{url}"
     JSON(response.body)['body'] if response.code == 200
   rescue RestClient::Exception => error
     Honeybadger.notify "Release #{deploy.build.version} was not found on GitHub (#{error})"
+  end
+
+  def github_project
+    ENV['GITHUB_PROJECT']
   end
 
   def app
