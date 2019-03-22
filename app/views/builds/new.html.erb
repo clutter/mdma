@@ -1,5 +1,5 @@
 <%= form_with(model: @build) do |form| %>
-  <%= fieldset '1. Select a file to upload' do %>
+  <%= fieldset "1. Select a file to upload for #{ENV['MDMA_APP_IDENTIFIER']}" do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
       <% if @build.errors[:package_attachment].any? %>
