@@ -16,10 +16,10 @@
       <div class="form-group col-md-4">
         <%= form.label :version, class: 'sr-only' %>
         <% if @build.errors[:version].any? %>
-          <%= form.number_field :version, class: 'form-control is-invalid', placeholder: 'Version number' %>
+          <%= form.text_field :version, class: 'form-control is-invalid', placeholder: 'Version' %>
           <div class="invalid-feedback"><%= @build.errors.full_messages_for(:version).to_sentence %>.</div>
         <% else %>
-          <%= form.number_field :version, class: 'form-control', placeholder: 'Version number' %>
+          <%= form.text_field :version, class: 'form-control', placeholder: 'Version' %>
         <% end %>
       </div>
       <div class="form-group col-md-4">
