@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_15_001316) do
+ActiveRecord::Schema.define(version: 2019_04_05_222600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2018_03_15_001316) do
     t.datetime "deploy_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "version", null: false
+    t.string "version", null: false
     t.index ["version"], name: "index_builds_on_version", unique: true
   end
 
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 2018_03_15_001316) do
 
   create_table "devices", force: :cascade do |t|
     t.string "name"
-    t.integer "app_version"
+    t.string "app_version"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["app_version"], name: "index_devices_on_app_version"
