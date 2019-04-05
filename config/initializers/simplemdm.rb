@@ -25,5 +25,23 @@ module SimpleMDM
 
       devices
     end
+
+    # Overwrites the fetch method to go through each page.
+    def installed_apps
+      installed_apps = []
+      starting_after = nil
+      more_pages = true
+
+      while more_pages
+        params = { limit: 100, starting_after: starting_after }.compact
+        resp = RestClient.get "#{SimpleMDM.api_url}devices/#{id}/installed_apps", params: params
+        hash = JSON.parse(resp)
+        installed_apps.concat hash['data']
+        more_pages = hash['has_more']
+        starting_after = hash['data'].last['id'] if more_pages
+      end
+
+      installed_apps.map { |app| InstalledApp.build app }
+    end
   end
 end
