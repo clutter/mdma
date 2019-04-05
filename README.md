@@ -32,6 +32,9 @@ How it works
 The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 10 minutes.
 `bundle exec rake deploys:enqueue` checks whether any build needs to be deployed soon and adds to the queue.
 
+A separate job is run on Heroku Scheduler every day.
+`bundle exec rake devices:fetch` fetches the list of devices with the latest app version.
+
 How to delete a build
 =====================
 
