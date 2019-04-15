@@ -4,7 +4,7 @@ ruby '2.5.5'
 
 gem 'rails', '~> 5.2.2'                    # Rails framework
 gem 'pg', '~> 0.18'                        # Database for Active Record
-gem 'sidekiq', '~> 5.0'                    # Background processor
+gem 'sidekiq', '~> 5.2'                    # Background processor
 gem 'puma', '~> 3.12'                      # Fast and concurrent web server
 gem 'bootsnap', '>= 1.1.0', require: false # Speed up Rails boot time
 gem 'aws-sdk-s3', '~> 1.23', require: false # Upload files to S3
