@@ -18,4 +18,12 @@ module MenuHelper
       safe_join [icon, name]
     end
   end
+
+  def navbar_brand
+    if ENV['LOGO_URL']
+      image_tag ENV['LOGO_URL'], alt: 'mdma', width: 30, height: 30, style: 'border-radius: 5px'
+    else
+      'mdma'
+    end
+  end
 end

@@ -16,7 +16,9 @@
 <body>
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-      <span class="navbar-brand">mdma</span>
+      <span class="navbar-brand">
+        <%= navbar_brand %>
+      </span>
       <% if logged_in? %>
         <ul class="navbar-nav mr-auto">
           <%= nav_link_to 'Show builds', root_path, icon: 'archive' %>
