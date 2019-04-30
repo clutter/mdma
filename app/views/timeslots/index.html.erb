@@ -1,16 +1,19 @@
+<% content_for(:refresh) { refresh_button_to 'Refresh devices', fetches_path } %>
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Delay in hours</th>
       <th scope="col">Devices starting with</th>
+      <th scope="col">Delay in hours</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @timeslots.each do |timeslot| %>
       <tr>
-        <th scope="row"><%= timeslot.delay_in_hours %></th>
         <td><%= prefixes_for timeslot %></td>
+        <td><%= timeslot.delay_in_hours %></td>
+        <td><%= link_to 'Show devices', timeslot %></td>
       </tr>
     <% end %>
   </tbody>
