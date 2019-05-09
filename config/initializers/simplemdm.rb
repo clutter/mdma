@@ -41,7 +41,7 @@ module SimpleMDM
         starting_after = hash['data'].last['id'] if more_pages
       end
 
-      installed_apps.map { |app| InstalledApp.build app }
+      installed_apps.map(&InstalledApp.method(:build))
     end
   end
 
