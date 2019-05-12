@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   end
   resources :builds, only: %i[new create]
   resources :enqueues, only: %i[create]
-  resources :devices, only: %i[index]
-  resources :timeslots, only: %i[index]
+  resources :devices, only: %i[index update]
+  resources :timeslots, only: %i[index show]
   resources :fetches, only: %i[create]
   root to: 'builds#index'
 end

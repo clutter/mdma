@@ -1,0 +1,22 @@
+<% content_for(:refresh) { refresh_button_to 'Refresh devices', fetches_path } %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Devices starting with <%= @timeslot.prefixes.to_sentence %></th>
+      <th scope="col">Installed version</th>
+      <th scope="col">Expected version</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @timeslot.devices.order(:name).each do |device| %>
+      <tr>
+        <td><%= device.name %></td>
+        <td><%= device.app_version %></td>
+        <td><%= @timeslot.expected_version %></td>
+        <td><%= push_app_button_to device, disabled: (device.app_version == @timeslot.expected_version) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

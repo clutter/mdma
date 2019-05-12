@@ -5,4 +5,8 @@ class TimeslotsController < ApplicationController
   def index
     @timeslots = Timeslot.enabled.order(:delay_in_hours)
   end
+
+  def show
+    @timeslot = Timeslot.enabled.find params[:id]
+  end
 end
