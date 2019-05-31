@@ -4,6 +4,7 @@
     <tr>
       <th>Version</th>
       <th>Deploy</th>
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -15,10 +16,15 @@
         <td>
           on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>
+        <td></td>
         <% if build.manifest.attached? %>
-        <td><%= link_to 'Install', manifest_url(build.manifest) %></td>
+        <td>
+          <%= link_to 'Install', manifest_url(build.manifest), class: "btn btn-link" %>
+        </td>
         <% else %>
-        <td><%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %></td>
+        <td>
+          <%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %>
+        </td>
         <% end %>
       </tr>
       <% build.deploys.each do |deploy| %>
@@ -29,6 +35,11 @@
             for <%= prefixes_for deploy.timeslot %> devices
           </td>
           <td><%= deploy.status %></td>
+          <% if deploy.scheduled? %>
+          <td><%= cancel_deploy_button(deploy.id) %></td>
+          <% else %>
+          <td></td>
+          <% end %>
         </tr>
       <% end %>
     <% end %>

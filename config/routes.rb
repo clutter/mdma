@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :devices, only: %i[index]
   resources :timeslots, only: %i[index]
   resources :fetches, only: %i[create]
+  resources :deploys, only: %i[destroy]
   root to: 'builds#index'
 end
