@@ -3,15 +3,29 @@ RSpec.describe 'Uploading a build', :logged_in do
   let(:version) { '1234' }
   let(:local_file) { Rails.root.join file_fixture('demo.ipa') }
 
-  specify 'with valid data, displays the build' do
-    attach_file 'Choose the .ipa package for this build:', local_file
-    fill_in 'Version', with: version
-    fill_in 'Deploy date', with: Date.parse('2020-03-12')
-    click_on 'Upload and deploy'
+  context 'with valid data' do
+    before do
+      attach_file 'Choose the .ipa package for this build:', local_file
+      fill_in 'Version', with: version
+      fill_in 'Deploy date', with: Date.parse('2020-03-12')
+      click_on 'Upload and deploy'
+    end
 
-    expect(page).to have_text(version)
-    expect(page).to have_text('on Thursday, March 12, 2020 at 8:00PM PDT')
-    expect(page).to have_link('Install')
+    it 'displays the deploy' do
+      expect(page).to have_text(version)
+      expect(page).to have_text('on Thursday, March 12, 2020 at 8:00PM PDT')
+      expect(page).to have_link('Install')
+    end
+
+    context 'given some timeslots' do
+      before { Timeslot.first_or_create! }
+
+      it 'lets users cancel a specific build for a timeslot' do
+        expect(page).to have_text('scheduled')
+        click_on 'Cancel'
+        expect(page).to have_text('canceled')
+      end
+    end
   end
 
   specify 'with invalid data, displays errors' do
