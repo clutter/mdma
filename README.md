@@ -35,16 +35,6 @@ The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 
 A separate job is run on Heroku Scheduler every day.
 `bundle exec rake devices:fetch` fetches the list of devices with the latest app version.
 
-How to delete a build
-=====================
-
-If you have enqueued a build and you have changed your mind, run this command at least 10 minutes
-before the scheduled time:
-
-```
-heroku run rails runner 'Build.last.destroy'
-```
-
 How to contribute
 =================
 
