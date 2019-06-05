@@ -18,11 +18,11 @@ RSpec.describe 'Uploading a build', :logged_in do
     end
 
     context 'given some timeslots' do
-      before { Timeslot.first_or_create! }
+      before(:all) { Timeslot.first_or_create! }
 
       it 'lets users cancel a specific build for a timeslot' do
         expect(page).to have_text('scheduled')
-        click_on 'Cancel'
+        first(:button, 'Cancel').click
         expect(page).to have_text('canceled')
       end
     end
