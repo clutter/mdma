@@ -23,6 +23,6 @@ group :test do
   gem 'rspec-rails', '>= 3.7', '< 4.0'     # Testing framework
   gem 'capybara', '>= 2.15', '< 4.0'       # Runs system tests
   gem 'selenium-webdriver'                 # Runs system tests
-  gem 'webdrivers'                         # Runs system tests in Chrome
+  gem 'webdrivers', '~> 4.0'               # Runs system tests in Chrome
   gem 'simplecov'                          # Measure code coverage
 end
