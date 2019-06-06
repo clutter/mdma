@@ -2,7 +2,7 @@
 class Build < ActiveRecord::Base
   has_one_attached :package
   has_one_attached :manifest
-  validates :package_attachment, presence: true
+  validates :package, presence: true
 
   has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
 

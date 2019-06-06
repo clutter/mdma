@@ -2,9 +2,9 @@
   <%= fieldset "1. Select a file to upload for #{ENV['MDMA_APP_IDENTIFIER']}" do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
-      <% if @build.errors[:package_attachment].any? %>
+      <% if @build.errors[:package].any? %>
         <%= form.file_field :package, class: 'form-control-file is-invalid form-control' %>
-        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:package_attachment).to_sentence %>.</div>
+        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:package).to_sentence %>.</div>
       <% else %>
         <%= form.file_field :package, class: 'form-control-file form-control' %>
       <% end %>

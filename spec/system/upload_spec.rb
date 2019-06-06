@@ -33,7 +33,7 @@ RSpec.describe 'Uploading a build', :logged_in do
     text_fill_in 'Deploy time', with: 'abc'
     click_on 'Upload and deploy'
 
-    expect(page).to have_text %(Package attachment can't be blank.)
+    expect(page).to have_text %(Package can't be blank.)
     expect(page).to have_text %(Version can't be blank.)
     expect(page).to have_text %(Deploy date has an invalid format.)
     expect(page).to have_text %(Deploy time has an invalid format.)
