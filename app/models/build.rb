@@ -22,7 +22,7 @@ class Build < ActiveRecord::Base
     self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
   end
 
-  after_create_commit do
+  after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
   end
 
