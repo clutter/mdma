@@ -13,4 +13,5 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 sudo: required
 addons:
+  postgresql: 9.6
   chrome: stable

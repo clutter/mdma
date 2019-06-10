@@ -20,6 +20,12 @@ RSpec.configure do |config|
 
   config.filter_rails_from_backtrace!
 
+  config.before :each, running_jobs: true do
+    # Run enqueued jobs with the adapter set in config/environments/test.rb
+    # rather than overriding with the TestAdapter.
+    ActiveJob::Base.disable_test_adapter
+  end
+
   config.before(:each, type: :system) do
     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end

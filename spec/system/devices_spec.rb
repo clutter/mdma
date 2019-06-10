@@ -1,4 +1,4 @@
-RSpec.describe 'The devices page', :logged_in do
+RSpec.describe 'The devices page', :logged_in, :running_jobs do
   before { visit devices_url }
 
   context 'given I click on Refresh Devices' do
