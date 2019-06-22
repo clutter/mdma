@@ -3,7 +3,7 @@ class BuildsController < ApplicationController
   before_action :require_authentication
 
   def index
-    @builds = Build.with_attached_package.includes(deploys: :timeslot).order(deploy_at: :desc)
+    @builds = Build.with_attached_package.with_attached_manifest.includes(deploys: :timeslot).order(deploy_at: :desc)
   end
 
   def new
