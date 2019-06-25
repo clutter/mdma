@@ -66,7 +66,7 @@ private
 
   def package_url
     ActiveStorage::Current.host = 'localhost:3000' if local?
-    CGI.escapeHTML @build.package.blob.service_url(expires_in: 1.week)
+    CGI.escapeHTML @build.package.blob.service_url(expires_in: Build::MANIFEST_EXPIRES_IN)
   end
 
   def local?
