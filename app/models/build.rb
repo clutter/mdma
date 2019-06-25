@@ -26,6 +26,12 @@ class Build < ActiveRecord::Base
     GenerateManifestJob.perform_later self
   end
 
+  MANIFEST_EXPIRES_IN = 1.week
+
+  def has_valid_manifest?
+    manifest.attached? && (manifest.attachment.created_at + MANIFEST_EXPIRES_IN).future?
+  end
+
 private
 
   def validate_future_date
