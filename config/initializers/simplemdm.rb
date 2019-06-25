@@ -44,4 +44,12 @@ module SimpleMDM
       installed_apps.map { |app| InstalledApp.build app }
     end
   end
+
+  class AppGroup < Base
+    def update_apps
+      hash, code = fetch("assignment_groups/#{id}/update_apps", :post)
+
+      code == 202
+    end
+  end
 end
