@@ -20,6 +20,9 @@ module Mdma
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Pacific Time (US & Canada)'
 
+    # Keep the user logged in for a week.
+    config.session_store :cookie_store, expire_after: 7.days
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
