@@ -2,7 +2,7 @@ require 'rest-client'
 
 # Slack.notify sends a notification to Slack about deploys
 class Slack
-  def self.notify(message, channel: ENV['SLACK_CHANNEL'])
+  def self.notify(message, channel: ENV['SLACK_DEPLOY_CHANNEL'])
     credentials = Rails.application.credentials.dig(:slack, :token_url)
     payload = { 'text' => message }
     payload['channel'] = channel if channel.present?
