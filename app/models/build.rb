@@ -24,6 +24,7 @@ class Build < ActiveRecord::Base
 
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
+    AnnounceBuildJob.perform_later self
   end
 
   MANIFEST_EXPIRES_IN = 1.week
