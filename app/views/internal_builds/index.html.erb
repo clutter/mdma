@@ -1,0 +1,26 @@
+<% content_for(:refresh) { refresh_button_to 'Enqueue pending', enqueues_path } %>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @builds.each do |build| %>
+      <tr class="table-default">
+        <td><%= build.version %></td>
+        <% if build.has_valid_manifest? %>
+        <td>
+          <%= link_to 'Install', manifest_url(build.manifest), class: "btn btn-link" %>
+        </td>
+        <% else %>
+        <td>
+          <%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %>
+        </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -6,6 +6,11 @@ class Build < ActiveRecord::Base
 
   has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
 
+  scope :external, -> { where.not(deploy_at: nil) }
+  scope :internal, -> { where(deploy_at: nil) }
+
+  scope :with_attachments, -> { with_attached_package.with_attached_manifest }
+
   attr_accessor :deploy_date, :deploy_time
   validates :version, presence: true, uniqueness: true
   validate on: :create do
