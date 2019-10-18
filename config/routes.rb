@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'auth', on: :member
   end
   resources :builds, only: %i[new create]
+  resources :internal_builds, only: %i[index]
   resources :enqueues, only: %i[create]
   resources :devices, only: %i[index]
   resources :timeslots, only: %i[index]

@@ -21,9 +21,10 @@
       </span>
       <% if logged_in? %>
         <ul class="navbar-nav mr-auto">
-          <%= nav_link_to 'Show builds', root_path, icon: 'archive' %>
-          <%= nav_link_to 'Show devices', devices_path, icon: 'mobile' %>
-          <%= nav_link_to 'Show timeslots', timeslots_path, icon: 'clock' %>
+          <%= nav_link_to 'External builds', root_path, icon: 'truck' %>
+          <%= nav_link_to 'Internal builds', internal_builds_path, icon: 'wrench' %>
+          <%= nav_link_to 'Devices', devices_path, icon: 'mobile' %>
+          <%= nav_link_to 'Timeslots', timeslots_path, icon: 'clock' %>
           <%= nav_link_to 'Upload new build', new_build_path, icon: 'cloud-upload-alt' %>
         </ul>
         <%= yield :refresh %>

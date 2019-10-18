@@ -6,21 +6,20 @@ class Build < ActiveRecord::Base
 
   has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
 
+  scope :external, -> { where.not(deploy_at: nil) }
+  scope :internal, -> { where(deploy_at: nil) }
+
+  scope :with_attachments, -> { with_attached_package.with_attached_manifest }
+
   attr_accessor :deploy_date, :deploy_time
-  validates :version, :deploy_date, :deploy_time, presence: true, on: :create
-  validates :version, uniqueness: true
+  validates :version, presence: true, uniqueness: true
   validate on: :create do
     validate_future_date if deploy_date.present?
     validate_future_time if deploy_time.present?
   end
 
-  before_create do
-    self.deploy_at ||= deploy_date + deploy_time.seconds_since_midnight.seconds
-  end
-
-  before_create do
-    self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
-  end
+  before_create :set_deploy_at, if: -> { deploy_date.present? && deploy_time.present? }
+  before_create :create_deploys, if: -> { deploy_at.present? }
 
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
@@ -46,5 +45,13 @@ private
     errors.add :deploy_time, 'must be in the future' if deploy_date == Time.zone.today && deploy_time < Time.zone.now
   rescue ArgumentError
     errors.add :deploy_time, 'has an invalid format'
+  end
+
+  def set_deploy_at
+    self.deploy_at ||= deploy_date + deploy_time.seconds_since_midnight.seconds
+  end
+
+  def create_deploys
+    self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
   end
 end
