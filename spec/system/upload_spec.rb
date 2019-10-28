@@ -17,14 +17,10 @@ RSpec.describe 'Uploading a build', :logged_in, :running_jobs do
       expect(page).to have_link('Install')
     end
 
-    context 'given some timeslots' do
-      before(:all) { Timeslot.first_or_create! }
-
-      it 'lets users cancel a specific build for a timeslot' do
-        expect(page).to have_text('scheduled')
-        first(:button, 'Cancel').click
-        expect(page).to have_text('canceled')
-      end
+    it 'lets users cancel a specific build for a timeslot' do
+      expect(page).to have_text('scheduled')
+      first(:button, 'Cancel').click
+      expect(page).to have_text('canceled')
     end
   end
 

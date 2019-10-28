@@ -4,7 +4,7 @@ class Build < ActiveRecord::Base
   has_one_attached :manifest
   validates :package, presence: true
 
-  has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
+  has_many :deploys, dependent: :destroy
 
   scope :external, -> { where.not(deploy_at: nil) }
   scope :internal, -> { where(deploy_at: nil) }
@@ -52,6 +52,6 @@ private
   end
 
   def create_deploys
-    self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
+    self.deploys = [ Deploy.new ]
   end
 end
