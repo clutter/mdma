@@ -17,7 +17,7 @@ RSpec.describe 'Uploading a build', :logged_in, :running_jobs do
       expect(page).to have_link('Install')
     end
 
-    it 'lets users cancel a specific build for a timeslot' do
+    it 'lets users cancel a specific build' do
       expect(page).to have_text('scheduled')
       first(:button, 'Cancel').click
       expect(page).to have_text('canceled')

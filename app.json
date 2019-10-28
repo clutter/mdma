@@ -1,7 +1,7 @@
 {
   "name": "mdma",
   "scripts": {
-    "postdeploy": "bundle exec rails db:migrate && bundle exec rails r 'Timeslot.create! if Timeslot.none?'"
+    "postdeploy": "bundle exec rails db:migrate"
   },
   "env": {
     "MDMA_APP_GROUP_ID": "21707",
