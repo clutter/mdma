@@ -60,10 +60,8 @@ private
   def notify_slack(deploy, device_count)
     app_name = "#{app.name} (#{deploy.build.version})"
     Slack.notify "#{app_name} released to #{device_count} #{'device'.pluralize device_count}."
-    if deploy.first?
-      notes = fetch_notes(deploy) if github_project.present?
-      Slack.notify notes if notes.present?
-    end
+    notes = fetch_notes(deploy) if github_project.present?
+    Slack.notify notes if notes.present?
   end
 
   def fetch_notes(deploy)

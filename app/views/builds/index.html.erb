@@ -27,18 +27,16 @@
         </td>
         <% end %>
       </tr>
-      <% build.deploys.each do |deploy| %>
-        <tr class="<%= table_class_for(deploy) %>">
-          <td></td>
-          <td>Deploy #<%= deploy.id %></td>
-          <td><%= deploy.status %></td>
-          <% if deploy.scheduled? %>
-          <td><%= cancel_deploy_button(deploy.id) %></td>
-          <% else %>
-          <td></td>
-          <% end %>
-        </tr>
-      <% end %>
+      <tr class="<%= table_class_for(build.deploy) %>">
+        <td></td>
+        <td>Deploy #<%= build.deploy.id %></td>
+        <td><%= build.deploy.status %></td>
+        <% if build.deploy.scheduled? %>
+        <td><%= cancel_deploy_button(build.deploy.id) %></td>
+        <% else %>
+        <td></td>
+        <% end %>
+      </tr>
     <% end %>
   </tbody>
 </table>

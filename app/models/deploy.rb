@@ -20,8 +20,4 @@ class Deploy < ActiveRecord::Base
     DeployJob.set(wait_until: timestamp).perform_later self
     enqueued!
   end
-
-  def first?
-    build.deploys.first == self
-  end
 end

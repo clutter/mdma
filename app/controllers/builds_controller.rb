@@ -3,7 +3,7 @@ class BuildsController < ApplicationController
   before_action :require_authentication
 
   def index
-    @builds = Build.external.with_attachments.includes(:deploys).order(deploy_at: :desc)
+    @builds = Build.external.with_attachments.includes(:deploy).order(deploy_at: :desc)
   end
 
   def new
