@@ -30,10 +30,7 @@
       <% build.deploys.each do |deploy| %>
         <tr class="<%= table_class_for(deploy) %>">
           <td></td>
-          <td>
-            after <%= pluralize deploy.timeslot.delay_in_hours, 'hour' %>
-            for <%= prefixes_for deploy.timeslot %> devices
-          </td>
+          <td>Deploy #<%= deploy.id %></td>
           <td><%= deploy.status %></td>
           <% if deploy.scheduled? %>
           <td><%= cancel_deploy_button(deploy.id) %></td>
