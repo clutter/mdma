@@ -14,17 +14,13 @@ After [setting up the right groups on SimpleMDM](#setup), you can do the followi
 
 [1] Upload a new build for an iOS app and decide when it should be pushed to devices
 
-<img width="1792" alt="timeslots" src="https://user-images.githubusercontent.com/32649767/36555944-597f438e-17b8-11e8-89b2-3c8237cebb0e.png">
-
-[2] Specify whether devices starting with a certain prefix should receive a delayed update
-
 <img width="1792" alt="home" src="https://user-images.githubusercontent.com/32649767/36555942-595203ba-17b8-11e8-91ef-89d9a1461a2c.png">
 
-[3] Check the status of every pending, scheduled, and completed push
+[2] Check the status of every pending, scheduled, and completed push
 
 <img width="1792" alt="devices" src="https://user-images.githubusercontent.com/32649767/36555941-593adbc2-17b8-11e8-9a52-579f99a2e33d.png">
 
-[4] Browse the list of all devices to check the current version of the app
+[3] Browse the list of all devices to check the current version of the app
 
 How it works
 ============
