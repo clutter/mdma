@@ -7,7 +7,7 @@ class BuildsController < ApplicationController
   end
 
   def new
-    @build = Build.new deploy_time: Time.strptime('20:00', '%H:%M')
+    @build = Build.new deploy_time: Time.strptime('03:00', '%H:%M')
   end
 
   def create

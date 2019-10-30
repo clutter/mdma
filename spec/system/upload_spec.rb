@@ -13,7 +13,7 @@ RSpec.describe 'Uploading a build', :logged_in, :running_jobs do
 
     it 'displays the deploy' do
       expect(page).to have_text(version)
-      expect(page).to have_text('on Thursday, March 12, 2020 at 8:00PM PDT')
+      expect(page).to have_text('on Thursday, March 12, 2020 at 3:00AM PDT')
       expect(page).to have_link('Install')
     end
 
