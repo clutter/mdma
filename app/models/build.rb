@@ -4,7 +4,7 @@ class Build < ActiveRecord::Base
   has_one_attached :manifest
   validates :package, presence: true
 
-  has_many :deploys, -> { joins(:timeslot).order 'timeslots.delay_in_hours' }, dependent: :destroy
+  has_one :deploy, dependent: :destroy
 
   scope :external, -> { where.not(deploy_at: nil) }
   scope :internal, -> { where(deploy_at: nil) }
@@ -19,7 +19,7 @@ class Build < ActiveRecord::Base
   end
 
   before_create :set_deploy_at, if: -> { deploy_date.present? && deploy_time.present? }
-  before_create :create_deploys, if: -> { deploy_at.present? }
+  before_create :create_deploy, if: -> { deploy_at.present? }
 
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
@@ -51,7 +51,7 @@ private
     self.deploy_at ||= deploy_date + deploy_time.seconds_since_midnight.seconds
   end
 
-  def create_deploys
-    self.deploys = Timeslot.enabled.map { |timeslot| Deploy.new timeslot: timeslot }
+  def create_deploy
+    self.deploy = Deploy.new
   end
 end

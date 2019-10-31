@@ -58,13 +58,10 @@ private
   end
 
   def notify_slack(deploy, device_count)
-    slots = deploy.timeslot.prefixes.to_sentence
     app_name = "#{app.name} (#{deploy.build.version})"
-    Slack.notify "#{app_name} released to #{device_count} #{'device'.pluralize device_count} in #{slots}."
-    if deploy.first?
-      notes = fetch_notes(deploy) if github_project.present?
-      Slack.notify notes if notes.present?
-    end
+    Slack.notify "#{app_name} released to #{device_count} #{'device'.pluralize device_count}."
+    notes = fetch_notes(deploy) if github_project.present?
+    Slack.notify notes if notes.present?
   end
 
   def fetch_notes(deploy)
@@ -91,7 +88,6 @@ private
 
   def should_push?(deploy, device)
     device.device_name &&
-      deploy.includes_device_named?(device.device_name) &&
       device.device_group_id.in?(app_group.device_group_ids) &&
       device.status == 'enrolled'
   end
