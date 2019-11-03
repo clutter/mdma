@@ -18,6 +18,7 @@ class Build < ActiveRecord::Base
     validate_future_time if deploy_time.present?
   end
 
+  before_create :set_version
   before_create :set_deploy_at, if: -> { deploy_date.present? && deploy_time.present? }
   before_create :create_deploy, if: -> { deploy_at.present? }
 
@@ -32,6 +33,11 @@ class Build < ActiveRecord::Base
   end
 
 private
+
+  def set_version
+    info_plist = PackageAnalyzer.new(@build.package.blob).metadata
+    self.version = info_plist[:bundle_version]
+  end
 
   def validate_future_date
     self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'

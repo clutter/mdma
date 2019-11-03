@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   resources :fetches, only: %i[create]
   resources :deploys, only: %i[destroy]
   root to: 'builds#index'
+
+  namespace :api do
+    resources :builds, only: %i[create]
+  end
 end
