@@ -11,14 +11,14 @@
     </div>
   <% end %>
 
-  <%= fieldset "2. Specify the version" do %>
+  <%= fieldset "2. Title (Optional)" do %>
     <div class="form-group">
-      <%= form.label :version, class: 'sr-only' %>
-      <% if @build.errors[:version].any? %>
-        <%= form.text_field :version, class: 'form-control is-invalid', placeholder: 'Version' %>
-        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:version).to_sentence %>.</div>
+      <%= form.label :title, class: 'sr-only' %>
+      <% if @build.errors[:title].any? %>
+        <%= form.text_field :title, class: 'form-control is-invalid', placeholder: 'Title' %>
+        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:title).to_sentence %>.</div>
       <% else %>
-        <%= form.text_field :version, class: 'form-control', placeholder: 'Version' %>
+        <%= form.text_field :title, class: 'form-control', placeholder: 'Title' %>
       <% end %>
     </div>
   <% end %>
