@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th>Version</th>
+      <th>Title</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -11,6 +12,7 @@
     <% @builds.each do |build| %>
       <tr class="table-default">
         <td><%= build.version %></td>
+        <td><%= build.title %></td>
         <% if build.has_valid_manifest? %>
         <td>
           <%= link_to 'Install', manifest_url(build.manifest), class: "btn btn-link" %>
