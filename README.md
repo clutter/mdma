@@ -31,6 +31,17 @@ The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 
 A separate job is run on Heroku Scheduler every day.
 `bundle exec rake devices:fetch` fetches the list of devices with the latest app version.
 
+A third-party client can be used to make a request to upload a build. This can be used in place of the web interface in order to do things like upload a build automatically after a GitHub action is triggered. To use this functionality, the `MDMA_TOKEN` environment variable must be set. An example request is shown below.
+
+```
+curl -X POST \
+  -H "Authorization: Token token=[mdma_token]" \
+  -H "Content-Type: multipart/form-data" \
+  -F "package=@[ipa_path]" \
+  -F "title=\"[title]\"" \
+  http://[host]/api/builds
+ ```
+
 How to contribute
 =================
 
@@ -52,6 +63,7 @@ The following environment variables are optional:
 
 - `GITHUB_PROJECT`: The GitHub "username/project" path to fetch release notes from
 - `SLACK_CHANNEL`: The Slack channel to post notifications to (defaults to #deploys)
+- `MDMA_TOKEN`: The key required for a third-party client to make a request to upload a build
 
 For completeness, these are the credentials stored in the app:
 

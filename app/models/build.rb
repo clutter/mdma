@@ -18,9 +18,10 @@ class Build < ActiveRecord::Base
     validate_future_time if deploy_time.present?
   end
 
-  before_create :set_version
   before_create :set_deploy_at, if: -> { deploy_date.present? && deploy_time.present? }
   before_create :create_deploy, if: -> { deploy_at.present? }
+
+  before_validation :set_version, on: :create
 
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
@@ -35,7 +36,7 @@ class Build < ActiveRecord::Base
 private
 
   def set_version
-    info_plist = PackageAnalyzer.new(@build.package.blob).metadata
+    info_plist = PackageAnalyzer.new(package.blob).metadata
     self.version = info_plist[:bundle_version]
   end
 
