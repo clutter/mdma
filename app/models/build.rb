@@ -19,7 +19,7 @@ class Build < ActiveRecord::Base
   end
 
   before_create :set_deploy_at, if: -> { deploy_date.present? && deploy_time.present? }
-  before_create :create_deploy, if: -> { deploy_at.present? }
+  before_create :create_deploy, if: :external?
 
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
@@ -29,6 +29,10 @@ class Build < ActiveRecord::Base
 
   def has_valid_manifest?
     manifest.attached? && (manifest.attachment.created_at + MANIFEST_EXPIRES_IN).future?
+  end
+
+  def external?
+    deploy_at.present?
   end
 
 private

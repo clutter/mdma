@@ -14,7 +14,7 @@ class BuildsController < ApplicationController
     @build = Build.new(build_params)
 
     if @build.save
-      redirect_to root_url
+      redirect_to @build.external? ? root_url : internal_builds_url
     else
       render :new
     end
