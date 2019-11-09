@@ -51,7 +51,8 @@ In order to use `mdma`, the following environment variables need to be set:
 The following environment variables are optional:
 
 - `GITHUB_PROJECT`: The GitHub "username/project" path to fetch release notes from
-- `SLACK_CHANNEL`: The Slack channel to post notifications to (defaults to #deploys)
+- `SLACK_DEPLOY_CHANNEL`: The Slack channel to post deploys to
+- `SLACK_BUILD_CHANNEL`: The Slack channel to post builds to
 
 For completeness, these are the credentials stored in the app:
 
