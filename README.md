@@ -31,6 +31,27 @@ The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 
 A separate job is run on Heroku Scheduler every day.
 `bundle exec rake devices:fetch` fetches the list of devices with the latest app version.
 
+How to use as an API
+====================
+
+Apart from using the web flow, third-party clients can also create internal builds by means of an API.
+In order to do so, an option `MDMA_TOKEN` must be set in the mdma app and communicated to the third-party clients.
+Clients will use this token to submit requests like this:
+
+```
+curl -X POST \
+  -H "Authorization: Token token=[mdma token]" \
+  -F "build[package]=@[path to the IPA file]" \
+  [mdma host]/api/builds
+```
+
+and can expect one of the following responses:
+
+- 201 Created (no body): the file was uploaded and the internal build created
+- 401 Unauthorized (no body): the provided token is missing or invalid
+- 400 Bad Request (JSON body with "message" String): the params are invalid
+
+
 How to contribute
 =================
 
@@ -52,6 +73,7 @@ The following environment variables are optional:
 
 - `GITHUB_PROJECT`: The GitHub "username/project" path to fetch release notes from
 - `SLACK_CHANNEL`: The Slack channel to post notifications to (defaults to #deploys)
+- `MDMA_TOKEN`: An authorization token for third-party API clients
 
 For completeness, these are the credentials stored in the app:
 
