@@ -2,45 +2,24 @@
   <%= fieldset "1. Choose a file to upload for #{ENV['MDMA_APP_IDENTIFIER']}" do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
-      <% if @build.errors[:package].any? %>
-        <%= form.file_field :package, class: 'form-control-file is-invalid form-control' %>
-        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:package).to_sentence %>.</div>
-      <% else %>
-        <%= form.file_field :package, class: 'form-control-file form-control' %>
+      <% with_errors_on @build, :package, :version do |field_options = {}| %>
+        <%= form.file_field :package, field_options %>
       <% end %>
     </div>
   <% end %>
 
-  <%= fieldset "2. Specify the version" do %>
-    <div class="form-group">
-      <%= form.label :version, class: 'sr-only' %>
-      <% if @build.errors[:version].any? %>
-        <%= form.text_field :version, class: 'form-control is-invalid', placeholder: 'Version' %>
-        <div class="invalid-feedback"><%= @build.errors.full_messages_for(:version).to_sentence %>.</div>
-      <% else %>
-        <%= form.text_field :version, class: 'form-control', placeholder: 'Version' %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <%= fieldset "3. For external builds only, choose a date and time to deploy in #{Time.zone.name}" do %>
+  <%= fieldset "2. For external builds only, choose a date and time to deploy in #{Time.zone.name}" do %>
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= form.label :deploy_date, class: 'sr-only' %>
-        <% if @build.errors[:deploy_date].any? %>
-          <%= form.date_field :deploy_date, class: 'form-control is-invalid' %>
-          <div class="invalid-feedback"><%= @build.errors.full_messages_for(:deploy_date).to_sentence %>.</div>
-        <% else %>
-          <%= form.date_field :deploy_date, class: 'form-control' %>
+        <% with_errors_on @build, :deploy_date do |field_options = {}| %>
+          <%= form.date_field :deploy_date, field_options %>
         <% end %>
       </div>
       <div class="form-group col-md-6">
         <%= form.label :deploy_time, class: 'sr-only' %>
-        <% if @build.errors[:deploy_time].any? %>
-          <%= form.time_field :deploy_time, class: 'form-control is-invalid' %>
-          <div class="invalid-feedback"><%= @build.errors.full_messages_for(:deploy_time).to_sentence %>.</div>
-        <% else %>
-          <%= form.time_field :deploy_time, class: 'form-control' %>
+        <% with_errors_on @build, :deploy_time do |field_options = {}| %>
+          <%= form.time_field :deploy_time, field_options %>
         <% end %>
       </div>
     </div>
