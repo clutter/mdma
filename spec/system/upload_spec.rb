@@ -1,7 +1,7 @@
 RSpec.describe 'Uploading a build', :logged_in, :running_jobs do
   before { visit new_build_url }
   let(:version) { '1234' }
-  let(:local_file) { Rails.root.join file_fixture('demo.ipa') }
+  let(:local_file) { Rails.root.join file_fixture('demo_v42.ipa') }
 
   context 'with valid data' do
     before do

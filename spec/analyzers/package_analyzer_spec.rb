@@ -3,7 +3,7 @@ RSpec.describe PackageAnalyzer do
   let(:metadata) { PackageAnalyzer.new(blob).metadata }
 
   describe 'analyzing a valid .ipa file' do
-    let(:filename) { 'demo.ipa' }
+    let(:filename) { 'demo_v42.ipa' }
 
     it 'correctly parses metadata from its InfoPlist' do
       expect(metadata[:bundle_display_name]).to be_nil
