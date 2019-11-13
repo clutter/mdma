@@ -39,6 +39,10 @@ class Build < ActiveRecord::Base
     deploy_at.present?
   end
 
+  def error_message
+    errors.full_messages.to_sentence
+  end
+
 private
 
   def set_version

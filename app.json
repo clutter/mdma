@@ -10,6 +10,9 @@
     "RAILS_MASTER_KEY": {
       "required": true
     },
+    "MDMA_TOKEN": {
+      "generator": "secret"
+    },
     "REDIS_PROVIDER": {
       "required": true
     }
