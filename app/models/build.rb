@@ -1,3 +1,5 @@
+require 'cfpropertybundle'
+
 # A single build includes the package file to send to the devices.
 class Build < ActiveRecord::Base
   has_one_attached :package
@@ -11,8 +13,10 @@ class Build < ActiveRecord::Base
 
   scope :with_attachments, -> { with_attached_package.with_attached_manifest }
 
-  attr_accessor :deploy_date, :deploy_time
+  before_validation :set_version, on: :create, if: -> { package.attached? }
   validates :version, presence: true, uniqueness: true
+
+  attr_accessor :deploy_date, :deploy_time
   validate on: :create do
     validate_future_date if deploy_date.present?
     validate_future_time if deploy_time.present?
@@ -36,6 +40,14 @@ class Build < ActiveRecord::Base
   end
 
 private
+
+  def set_version
+    file = attachment_changes['package'].attachable
+    metadata = CFPropertyBundle.new(file).metadata
+    self.version = metadata[:bundle_version]
+  rescue CFPropertyBundle::Error
+    errors.add(:version, :invalid, message: 'cannot be extracted from the attachment')
+  end
 
   def validate_future_date
     self.deploy_date = Date.strptime deploy_date, '%Y-%m-%d'
