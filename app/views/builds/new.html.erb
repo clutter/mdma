@@ -2,22 +2,13 @@
   <%= fieldset "1. Choose a file to upload for #{ENV['MDMA_APP_IDENTIFIER']}" do %>
     <div class="form-group">
       <%= form.label :package, 'Choose the .ipa package for this build:', class: 'sr-only' %>
-      <% with_errors_on @build, :package do |field_options = {}| %>
+      <% with_errors_on @build, :package, :version do |field_options = {}| %>
         <%= form.file_field :package, field_options %>
       <% end %>
     </div>
   <% end %>
 
-  <%= fieldset "2. Specify the version" do %>
-    <div class="form-group">
-      <%= form.label :version, class: 'sr-only' %>
-      <% with_errors_on @build, :version do |field_options = {}| %>
-        <%= form.text_field :version, field_options.merge(placeholder: 'Version') %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <%= fieldset "3. For external builds only, choose a date and time to deploy in #{Time.zone.name}" do %>
+  <%= fieldset "2. For external builds only, choose a date and time to deploy in #{Time.zone.name}" do %>
     <div class="form-row">
       <div class="form-group col-md-6">
         <%= form.label :deploy_date, class: 'sr-only' %>
