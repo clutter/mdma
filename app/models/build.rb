@@ -31,7 +31,7 @@ class Build < ActiveRecord::Base
 
   MANIFEST_EXPIRES_IN = 1.week
 
-  def has_valid_manifest?
+  def with_valid_manifest?
     manifest.attached? && (manifest.attachment.created_at + MANIFEST_EXPIRES_IN).future?
   end
 

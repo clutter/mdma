@@ -1,4 +1,4 @@
-# Methods related to a build’s manifest.
+# Methods related to a build's manifest.
 module ManifestHelper
   def manifest_url(manifest)
     return unless manifest.attached?
