@@ -5,7 +5,7 @@ module FormHelper
     safe_join [tag.hr, fieldset]
   end
 
-  def with_errors_on(model, *attributes, &block)
+  def with_errors_on(model, *attributes)
     attributes_with_errors = model.errors.keys & attributes
 
     if attributes_with_errors.any?

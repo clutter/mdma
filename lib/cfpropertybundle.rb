@@ -17,8 +17,8 @@ class CFPropertyBundle
       plist_hash = CFPropertyList.native_types plist_dict
       relevant_keys.transform_values { |identifier| plist_hash[identifier] }.compact
     end
-  rescue Zip::Error => error
-    raise Error, error.message
+  rescue Zip::Error => e
+    raise Error, e.message
   end
 
 private
@@ -26,8 +26,8 @@ private
   def extract_plist_data_from(package)
     app_name = package.dir.entries('Payload').find { |entry_name| entry_name =~ /.app$/ }
     package.get_entry("Payload/#{app_name}/Info.plist").get_input_stream.read
-  rescue SystemCallError => error
-    raise Error, error.message
+  rescue SystemCallError => e
+    raise Error, e.message
   end
 
   def relevant_keys

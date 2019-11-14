@@ -1,10 +1,9 @@
 AllCops:
-  TargetRubyVersion: '2.5.0'
+  TargetRubyVersion: '2.6.5'
   Exclude:
     - db/schema.rb
     - config/**/*
     - bin/*
-    - Rakefile
 
 Bundler/OrderedGems:
   Enabled: false
@@ -19,6 +18,14 @@ Style/Documentation:
 Metrics/MethodLength:
   Exclude:
     - db/migrate/*.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/*.rb
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
 
 Metrics/LineLength:
   Max: 120
