@@ -1,3 +1,4 @@
+# Cancels a scheduled build from being deployed.
 class DeploysController < ApplicationController
   before_action :require_authentication
 

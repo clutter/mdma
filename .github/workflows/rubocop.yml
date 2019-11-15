@@ -1,0 +1,18 @@
+on: push
+
+jobs:
+  rubocop-checks:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check GitHub context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Rubocop checks
+      uses: gimenete/rubocop-action@1.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

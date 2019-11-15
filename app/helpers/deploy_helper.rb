@@ -5,7 +5,7 @@ module DeployHelper
   end
 
   def cancel_deploy_button(deploy_id)
-    button_to 'Cancel', deploy_path(id: deploy_id), method: :delete, class: "btn btn-link text-danger"
+    button_to 'Cancel', deploy_path(id: deploy_id), method: :delete, class: 'btn btn-link text-danger'
   end
 
 private

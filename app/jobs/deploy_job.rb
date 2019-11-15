@@ -6,11 +6,11 @@ class DeployJob < ActiveJob::Base
 
   def perform(deploy)
     upload_file deploy
-    device_count = push_to_devices deploy
+    device_count = push_to_devices
     notify_slack deploy, device_count
     deploy.successful!
-  rescue *connection_errors => error
-    perform_again deploy, error
+  rescue *connection_errors => e
+    perform_again deploy, e
   end
 
 private
@@ -24,10 +24,11 @@ private
     app.save
   end
 
-  def push_to_devices(deploy)
+  def push_to_devices
     device_count = 0
     SimpleMDM::Device.all.each do |device|
-      next unless should_push?(deploy, device)
+      next unless should_push_to?(device)
+
       device.push_apps
       device.refresh
       device_count += 1
@@ -65,13 +66,19 @@ private
   end
 
   def fetch_notes(deploy)
-    github_username = Rails.application.credentials.dig :github, :username
-    github_token = Rails.application.credentials.dig :github, :token
     url = "api.github.com/repos/#{github_project}/releases/tags/#{deploy.build.version}"
     response = RestClient.get "https://#{github_username}:#{github_token}@#{url}"
     JSON(response.body)['body'] if response.code == 200
-  rescue RestClient::Exception => error
-    Honeybadger.notify "Release #{deploy.build.version} was not found on GitHub (#{error})"
+  rescue RestClient::Exception => e
+    Honeybadger.notify "Release #{deploy.build.version} was not found on GitHub (#{e})"
+  end
+
+  def github_username
+    Rails.application.credentials.dig :github, :username
+  end
+
+  def github_token
+    Rails.application.credentials.dig :github, :token
   end
 
   def github_project
@@ -86,7 +93,7 @@ private
     @app_group ||= SimpleMDM::AppGroup.find(ENV['MDMA_APP_GROUP_ID'])
   end
 
-  def should_push?(deploy, device)
+  def should_push_to?(device)
     device.device_name &&
       device.device_group_id.in?(app_group.device_group_ids) &&
       device.status == 'enrolled'
