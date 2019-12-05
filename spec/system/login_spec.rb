@@ -1,7 +1,7 @@
 RSpec.describe 'Logging in' do
   before { login_as email }
 
-  context 'as a non-Clutter user' do
+  context 'from an unauthorized domain' do
     let(:email) { 'test@example.com' }
 
     it 'displays an authentication error' do
@@ -9,7 +9,7 @@ RSpec.describe 'Logging in' do
     end
   end
 
-  context 'as a Clutter user' do
+  context 'from an authorized domain' do
     let(:email) { 'test@clutter.com' }
 
     it 'displays the app' do
@@ -21,6 +21,7 @@ end
 private
 
 def login_as(email)
+  ENV['EMAIL_DOMAIN'] = '@clutter.com'
   authentication = double
   expect(authentication).to receive(:email).and_return email
   expect(Yt::Auth).to receive(:create).and_return(authentication)

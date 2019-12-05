@@ -1,4 +1,4 @@
 <p class='text-center'>
   <%= notice %><br />
-  <%= link_to "Log in with your clutter.com email", google_auth_url %>
+  <%= link_to "Log in with your #{ENV['EMAIL_DOMAIN']} email".squish, google_auth_url %>
 </p>
