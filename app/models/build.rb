@@ -13,8 +13,10 @@ class Build < ActiveRecord::Base
 
   scope :with_attachments, -> { with_attached_package.with_attached_manifest }
 
-  before_validation :set_version, on: :create, if: -> { package.attached? }
-  validates :version, presence: true, uniqueness: true
+  with_options if: -> { package.attached? } do
+    before_validation :set_version, on: :create
+    validates :version, uniqueness: true
+  end
 
   attr_accessor :deploy_date, :deploy_time
   validate on: :create do
