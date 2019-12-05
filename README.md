@@ -71,6 +71,7 @@ In order to use `mdma`, the following environment variables need to be set:
 
 The following environment variables are optional:
 
+- `EMAIL_DOMAIN`: Only allow logins from Google accounts belonging to this domain
 - `GITHUB_PROJECT`: The GitHub "username/project" path to fetch release notes from
 - `SLACK_CHANNEL`: The Slack channel to post notifications to (defaults to #deploys)
 - `MDMA_TOKEN`: An authorization token for third-party API clients

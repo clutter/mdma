@@ -4,6 +4,7 @@
     "postdeploy": "bundle exec rails db:migrate"
   },
   "env": {
+    "EMAIL_DOMAIN": "@clutter.com",
     "MDMA_APP_GROUP_ID": "21707",
     "MDMA_APP_ID": "91051",
     "MDMA_APP_IDENTIFIER": "com.clutter.UglySweater",

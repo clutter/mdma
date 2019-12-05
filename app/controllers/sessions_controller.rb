@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def auth
     auth = Yt::Auth.create redirect_uri: auth_sessions_url, code: params[:code]
-    if auth.email.ends_with? '@clutter.com'
+    if auth.email.ends_with? ENV.fetch('EMAIL_DOMAIN', '')
       session[:logged_in] = true
       redirect_to root_url
     else
