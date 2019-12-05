@@ -7,6 +7,9 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 
+require 'action_dispatch/system_testing/server'
+ActionDispatch::SystemTesting::Server.silence_puma = true
+
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
