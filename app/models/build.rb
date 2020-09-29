@@ -31,6 +31,9 @@ class Build < ActiveRecord::Base
     GenerateManifestJob.perform_later self
   end
 
+  after_update :handle_new_minimum_supported_version,
+               if: -> { minimum_supported_version && saved_change_to_minimum_supported_version? }
+
   MANIFEST_EXPIRES_IN = 1.week
 
   def with_valid_manifest?
@@ -75,5 +78,9 @@ private
 
   def create_deploy
     self.deploy = Deploy.new
+  end
+
+  def handle_new_minimum_supported_version
+    Build.where.not(id: id).where(minimum_supported_version: true).update_all(minimum_supported_version: false)
   end
 end
