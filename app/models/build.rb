@@ -10,6 +10,9 @@ class Build < ActiveRecord::Base
 
   scope :external, -> { where.not(deploy_at: nil) }
   scope :internal, -> { where(deploy_at: nil) }
+  scope :latest_deployed, lambda {
+    joins(:deploy).where(deploys: { status: %i[enqueued running successful] }).order(:deploy_at)
+  }
 
   scope :with_attachments, -> { with_attached_package.with_attached_manifest }
 

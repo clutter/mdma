@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'auth', on: :member
   end
   resources :builds, only: %i[new create] do
-    scope module: 'builds' do
+    scope module: :builds do
       resource :minimum_supported_version, only: :update
     end
   end
@@ -16,5 +16,8 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json }, constraints: lambda { |req| req.format == :json } do
     resources :builds, only: %i[create]
+    namespace :builds do
+      resource :recommended_versions, only: :show, constraints: { format: 'json' }
+    end
   end
 end
