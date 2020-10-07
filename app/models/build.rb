@@ -10,6 +10,9 @@ class Build < ActiveRecord::Base
 
   scope :external, -> { where.not(deploy_at: nil) }
   scope :internal, -> { where(deploy_at: nil) }
+  scope :latest_deployed, lambda {
+    joins(:deploy).where(deploys: { status: %i[enqueued running successful] }).order(:deploy_at)
+  }
 
   scope :with_attachments, -> { with_attached_package.with_attached_manifest }
 
@@ -30,6 +33,9 @@ class Build < ActiveRecord::Base
   after_create_commit prepend: true do
     GenerateManifestJob.perform_later self
   end
+
+  after_update :handle_new_minimum_supported_version,
+               if: -> { minimum_supported_version && saved_change_to_minimum_supported_version? }
 
   MANIFEST_EXPIRES_IN = 1.week
 
@@ -75,5 +81,9 @@ private
 
   def create_deploy
     self.deploy = Deploy.new
+  end
+
+  def handle_new_minimum_supported_version
+    Build.where.not(id: id).where(minimum_supported_version: true).update_all(minimum_supported_version: false)
   end
 end

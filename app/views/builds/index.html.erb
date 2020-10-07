@@ -1,5 +1,5 @@
 <% content_for(:refresh) { refresh_button_to 'Enqueue pending', enqueues_path } %>
-<table class="table table-sm">
+<table class="table table-sm text-center">
   <thead>
     <tr>
       <th>Version</th>
@@ -11,21 +11,26 @@
 
   <tbody>
     <% @builds.each do |build| %>
-      <tr class="table-default">
+      <tr class="table-default text-center">
         <td><%= build.version %></td>
         <td>
           on <%= l build.deploy_at.in_time_zone, format: :verbose %>
         </td>
         <td></td>
-        <% if build.with_valid_manifest? %>
         <td>
-          <%= link_to 'Install', manifest_url(build.manifest), class: "btn btn-link" %>
+          <% if build.with_valid_manifest? %>
+            <%= link_to 'Install', manifest_url(build.manifest), class: "btn btn-link" %>
+          <% else %>
+            <%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %>
+          <% end %>
+          <% if build.minimum_supported_version %>
+            Minimum Supported Version
+          <% else %>
+            <span class="d-inline-block">
+              <%= button_to 'Set As Minimum Supported', build_minimum_supported_version_url(build_id: build.id), method: :put, remote: false, class: "btn btn-primary" %>
+            </span>
+          <% end %>
         </td>
-        <% else %>
-        <td>
-          <%= link_to 'Download', rails_blob_url(build.package, disposition: 'attachment') %>
-        </td>
-        <% end %>
       </tr>
       <tr class="<%= table_class_for(build.deploy) %>">
         <td></td>
