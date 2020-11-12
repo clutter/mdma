@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.6.5'
+ruby '2.7.2'
 
 gem 'rails', '~> 6.0.0'                    # Rails framework
 gem 'pg', '~> 0.18'                        # Database for Active Record
