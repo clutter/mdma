@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe PackageAnalyzer do
   let(:blob) { ActiveStorage::Blob.create_after_upload! io: file_fixture(filename).open, filename: filename }
   let(:metadata) { PackageAnalyzer.new(blob).metadata }

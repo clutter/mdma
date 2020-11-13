@@ -1,3 +1,4 @@
+# typed: false
 # Extend SimpleMDM Ruby API to support refresh
 module SimpleMDM
   class Device < Base

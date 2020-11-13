@@ -1,3 +1,4 @@
+# typed: false
 # Displays the latest external builds and shows a form to create new ones.
 class BuildsController < ApplicationController
   before_action :require_authentication

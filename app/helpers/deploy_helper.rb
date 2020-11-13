@@ -1,3 +1,4 @@
+# typed: false
 # Methods related to visualizing deploys
 module DeployHelper
   def table_class_for(deploy)

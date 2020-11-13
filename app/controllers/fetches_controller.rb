@@ -1,3 +1,4 @@
+# typed: false
 # Refresh the list of devices with the app installed.
 class FetchesController < ApplicationController
   before_action :require_authentication

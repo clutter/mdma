@@ -1,3 +1,4 @@
+# typed: true
 # Ask SimpleMDM to refresh the list of apps on each device.
 class FetchDevicesJob < ActiveJob::Base
   queue_as :default
