@@ -16,6 +16,7 @@ gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 
 group :development do
   gem 'sorbet', '0.5.5949'                 # Add type checking for Ruby
+  gem 'sorbet-rails'                       # Add types for Rails
 end
 
 group :development, :test do
