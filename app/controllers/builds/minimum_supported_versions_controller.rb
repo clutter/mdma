@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 module Builds
   # Controller to handle setting the build that is the minimum supported version.
   class MinimumSupportedVersionsController < ApplicationController
