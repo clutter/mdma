@@ -14,6 +14,10 @@ gem 'honeybadger', '~> 4.1'                # Log errors
 gem 'rubyzip'                              # Extract Info.plist from build package
 gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 
+group :development do
+  gem 'sorbet', '0.5.5949'                 # Add type checking for Ruby
+end
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
   gem 'rubocop'
