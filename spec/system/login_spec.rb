@@ -21,7 +21,6 @@ end
 private
 
 def login_as(email)
-  ENV['EMAIL_DOMAIN'] = '@clutter.com'
   authentication = double
   expect(authentication).to receive(:email).and_return email
   expect(Yt::Auth).to receive(:create).and_return(authentication)

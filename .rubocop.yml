@@ -1,9 +1,12 @@
 AllCops:
-  TargetRubyVersion: '2.6.5'
+  TargetRubyVersion: "2.7.2"
   Exclude:
     - db/schema.rb
     - config/**/*
     - bin/*
+    - log/**/*
+    - tmp/**/*
+    - vendor/**/*
 
 Bundler/OrderedGems:
   Enabled: false

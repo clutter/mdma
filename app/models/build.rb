@@ -22,6 +22,7 @@ class Build < ActiveRecord::Base
   end
 
   attr_accessor :deploy_date, :deploy_time
+
   validate on: :create do
     validate_future_date if deploy_date.present?
     validate_future_time if deploy_time.present?
