@@ -16,10 +16,12 @@ gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
+  gem 'rubocop'
   gem 'spring'                             # Speed up local development
 end
 
 group :test do
+  gem 'rspec_junit_formatter'
   gem 'rspec-rails', '>= 3.7', '< 4.0'     # Testing framework
   gem 'capybara', '>= 2.15', '< 4.0'       # Runs system tests
   gem 'selenium-webdriver'                 # Runs system tests

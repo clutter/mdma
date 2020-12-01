@@ -1,0 +1,45 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:2.7.2-node-browsers
+      - image: circleci/postgres:12.1-alpine-ram
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: mdma_test
+    environment:
+      BUNDLE_JOBS: 4
+      BUNDLE_RETRY: 4
+      BUNDLE_PATH: vendor/bundle
+      BUNDLER_VERSION: 2.1.4
+      RAILS_ENV: test
+      RACK_ENV: test
+      PGHOST: localhost
+
+jobs:
+  rspec:
+    executor: default
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
+      - ruby/rspec-test
+      - run: ./cc-test-reporter after-build --exit-code $?
+  rubocop:
+    executor: default
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check
+
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - rspec
+      - rubocop
