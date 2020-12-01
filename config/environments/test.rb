@@ -49,4 +49,5 @@ Rails.application.configure do
 
   # Test app for test
   ENV['MDMA_APP_GROUP_ID'] = '21707'
+  ENV['EMAIL_DOMAIN'] = '@clutter.com'
 end
