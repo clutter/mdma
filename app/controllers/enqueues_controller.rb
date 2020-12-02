@@ -1,3 +1,4 @@
+# typed: true
 # Enqueues deploys that are scheduled in the next 20 minutes
 class EnqueuesController < ApplicationController
   before_action :require_authentication

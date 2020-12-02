@@ -1,3 +1,4 @@
+# typed: true
 # Methods related to visualizing forms
 module FormHelper
   def fieldset(legend, &block)

@@ -1,3 +1,4 @@
+# typed: false
 # Methods related to a build's manifest.
 module ManifestHelper
   def manifest_url(manifest)

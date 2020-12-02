@@ -1,3 +1,4 @@
+# typed: true
 # Methods to log in via Google apps
 module GoogleHelper
   def google_auth_url

@@ -1,3 +1,4 @@
+# typed: false
 RSpec.describe 'The devices page', :logged_in, :running_jobs do
   before { visit devices_url }
 

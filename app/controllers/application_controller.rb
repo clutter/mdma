@@ -1,3 +1,4 @@
+# typed: true
 # Base controller without any special behavior
 class ApplicationController < ActionController::Base
   def logged_in?

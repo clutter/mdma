@@ -1,3 +1,4 @@
+# typed: true
 require 'rest-client'
 
 # Slack.notify sends a notification to Slack about deploys

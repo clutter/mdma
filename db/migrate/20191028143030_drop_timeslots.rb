@@ -1,3 +1,4 @@
+# typed: true
 class DropTimeslots < ActiveRecord::Migration[6.0]
   def change
     drop_table :timeslots do |t|

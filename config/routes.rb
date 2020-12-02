@@ -1,3 +1,4 @@
+# typed: false
 Rails.application.routes.draw do
   resource :sessions, only: %i[new] do
     get 'auth', on: :member

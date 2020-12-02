@@ -1,3 +1,4 @@
+# typed: true
 require 'cfpropertybundle'
 
 # Extracts the following from an iOS App Store Package (.ipa):

@@ -1,3 +1,4 @@
+# typed: true
 require 'zip'
 require 'zip/filesystem'
 require 'cfpropertylist'

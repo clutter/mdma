@@ -1,3 +1,4 @@
+# typed: true
 module API
   # Base controller for third-party API requests.
   class BaseController < ActionController::Base
