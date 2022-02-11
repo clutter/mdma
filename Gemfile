@@ -5,7 +5,7 @@ ruby '2.7.2'
 gem 'rails', '~> 6.0.0'                    # Rails framework
 gem 'pg', '~> 0.18'                        # Database for Active Record
 gem 'sidekiq', '~> 5.0'                    # Background processor
-gem 'puma', '~> 3.12'                      # Fast and concurrent web server
+gem 'puma', '~> 4.3'                       # Fast and concurrent web server
 gem 'bootsnap', '>= 1.1.0', require: false # Speed up Rails boot time
 gem 'aws-sdk-s3', '~> 1.23', require: false # Upload files to S3
 gem 'yt-auth', '~> 0.3.1'                  # Authenticate with Google
