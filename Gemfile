@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.2'
+ruby '2.7.6'
 
 gem 'rails', '~> 6.0.0'                    # Rails framework
 gem 'pg', '~> 0.18'                        # Database for Active Record
@@ -16,7 +16,7 @@ gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
 gem 'sorbet-runtime'                       # Enforce types at runtime
 
 group :development do
-  gem 'sorbet', '0.5.5949'                 # Add type checking for Ruby
+  gem 'sorbet', '0.5.10448'                # Add type checking for Ruby
   gem 'sorbet-rails'                       # Add types for Rails
 end
 
