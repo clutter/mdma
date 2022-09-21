@@ -1,2 +1,5 @@
 --dir
 .
+--ignore=vendor/
+--ignore=db/migrate/20180315001316_old_migrations.rb
+

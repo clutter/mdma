@@ -13,11 +13,12 @@ gem 'simplemdm', '~> 1.3'                  # Connect to SimpleMDM API
 gem 'honeybadger', '~> 4.1'                # Log errors
 gem 'rubyzip'                              # Extract Info.plist from build package
 gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
-gem 'sorbet-runtime'                       # Enforce types at runtime
+gem 'sorbet-runtime'
+gem 'sorbet-rails'
 
 group :development do
-  gem 'sorbet', '0.5.10448'                # Add type checking for Ruby
-  gem 'sorbet-rails'                       # Add types for Rails
+  gem 'sorbet'
+  gem "tapioca", require: false
 end
 
 group :development, :test do
