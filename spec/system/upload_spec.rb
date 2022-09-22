@@ -1,4 +1,5 @@
 # typed: false
+
 RSpec.describe 'Uploading a build', :logged_in, :running_jobs do
   before { visit new_build_url }
 

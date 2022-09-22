@@ -18,7 +18,7 @@ gem 'sorbet-rails'
 
 group :development do
   gem 'sorbet'
-  gem "tapioca", require: false
+  gem 'tapioca', require: false
 end
 
 group :development, :test do

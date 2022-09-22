@@ -1,4 +1,5 @@
 # typed: true
+
 module API
   module Builds
     # Exposes an endpoint for third-party APIs to see the recommended build version.

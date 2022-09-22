@@ -1,4 +1,5 @@
 # typed: false
+
 RSpec.describe 'Creating a build via the API' do
   before { post api_builds_url, headers: headers, params: params }
   let(:headers) { {} }

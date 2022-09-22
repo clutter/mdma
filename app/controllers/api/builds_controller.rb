@@ -1,4 +1,5 @@
 # typed: false
+
 module API
   # Exposes an endpoint for third-party APIs to create internal builds.
   class BuildsController < BaseController

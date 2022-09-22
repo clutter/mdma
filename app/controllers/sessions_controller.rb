@@ -1,4 +1,5 @@
 # typed: true
+
 # Manages log in and log out through Google authentication.
 class SessionsController < ApplicationController
   def new; end

@@ -1,4 +1,5 @@
 # typed: false
+
 RSpec.describe 'Logging in' do
   before { login_as email }
 

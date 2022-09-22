@@ -1,4 +1,5 @@
 # typed: true
+
 # Methods related to the navigation menu
 module MenuHelper
   def nav_link_to(name, url, icon:)
