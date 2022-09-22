@@ -5,11 +5,23 @@ class ActionController::Base
   include GeneratedUrlHelpers
 end
 
+class ActionController::API
+  include GeneratedUrlHelpers
+end
+
 module ActionView::Helpers
   include GeneratedUrlHelpers
 end
 
 class ActionMailer::Base
+  include GeneratedUrlHelpers
+end
+
+class ActionDispatch::IntegrationTest
+  include GeneratedUrlHelpers
+end
+
+class ActionDispatch::SystemTestCase
   include GeneratedUrlHelpers
 end
 

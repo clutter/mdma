@@ -1,4 +1,5 @@
 # typed: false
+
 # A single deploy sends a build to all devices.
 class Deploy < ActiveRecord::Base
   belongs_to :build

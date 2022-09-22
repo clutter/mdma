@@ -1,4 +1,5 @@
 # typed: false
+
 # Generates and attaches a manifest to allow manually installing a build.
 class GenerateManifestJob < ActiveJob::Base
   queue_as :default

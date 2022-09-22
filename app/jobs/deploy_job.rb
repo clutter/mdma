@@ -1,4 +1,5 @@
 # typed: false
+
 require 'slack'
 
 # Uploads a new binary to SimpleMDM to push to the appropriate devices.

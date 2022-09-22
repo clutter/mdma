@@ -1,4 +1,5 @@
 # typed: true
+
 class AddMinimumSupportedVersionToDevice < ActiveRecord::Migration[6.0]
   def change
     add_column :builds, :minimum_supported_version, :boolean, default: false

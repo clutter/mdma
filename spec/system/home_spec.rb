@@ -1,4 +1,5 @@
 # typed: false
+
 RSpec.describe 'The home-page' do
   before { visit root_url }
 

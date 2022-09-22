@@ -1,12 +1,13 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@1.1.1
+  browser-tools: circleci/browser-tools@1.1
 
 executors:
   default:
     docker:
-      - image: circleci/ruby:2.7.2-node-browsers
-      - image: circleci/postgres:12.1-alpine-ram
+      - image: cimg/ruby:2.7.6-browsers
+      - image: cimg/postgres:14.5
         environment:
           POSTGRES_USER: circleci
           POSTGRES_DB: mdma_test
@@ -23,6 +24,7 @@ jobs:
   rspec:
     executor: default
     steps:
+      - browser-tools/install-browser-tools
       - checkout
       - ruby/install-deps
       - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
