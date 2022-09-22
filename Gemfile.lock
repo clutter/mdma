@@ -270,6 +270,14 @@ GEM
       sorbet-runtime (>= 0.5.9892)
     sorbet-runtime (0.5.10448)
     sorbet-static (0.5.10448-universal-darwin-14)
+    sorbet-static (0.5.10448-universal-darwin-15)
+    sorbet-static (0.5.10448-universal-darwin-16)
+    sorbet-static (0.5.10448-universal-darwin-17)
+    sorbet-static (0.5.10448-universal-darwin-18)
+    sorbet-static (0.5.10448-universal-darwin-19)
+    sorbet-static (0.5.10448-universal-darwin-20)
+    sorbet-static (0.5.10448-universal-darwin-21)
+    sorbet-static (0.5.10448-universal-darwin-22)
     sorbet-static (0.5.10448-x86_64-linux)
     sorbet-static-and-runtime (0.5.10448)
       sorbet (= 0.5.10448)
@@ -298,7 +306,7 @@ GEM
       yard-sorbet
     thor (1.2.1)
     thread_safe (0.3.6)
-    tzinfo (1.2.8)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
