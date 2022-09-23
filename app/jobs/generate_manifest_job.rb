@@ -49,7 +49,7 @@ private
             <key>metadata</key>
             <dict>
               <key>bundle-identifier</key>
-              <string>#{@info_plist[:bundle_version]}</string>
+              <string>#{@info_plist[:bundle_identifier]}</string>
               <key>bundle-version</key>
               <string>#{@info_plist[:bundle_short_version]}</string>
               <key>kind</key>
