@@ -68,7 +68,7 @@ private
 
   def package_url
     ActiveStorage::Current.host = 'http://localhost:3000' if local?
-    CGI.escapeHTML @build.package.blob.service_url(expires_in: Build::MANIFEST_EXPIRES_IN)
+    CGI.escapeHTML Rails.application.routes.url_helpers.build_package_url(@build.signed_id)
   end
 
   def local?
