@@ -4,6 +4,11 @@
 class GenerateManifestJob < ActiveJob::Base
   queue_as :default
 
+  DEFAULT_URL_OPTIONS = {
+    host: ENV.fetch('DEFAULT_HOST', 'localhost:3000'),
+    protocol: ENV.fetch('DEFAULT_PROTOCOL', 'http')
+  }.freeze
+
   def perform(build)
     @build = build
     @info_plist = PackageAnalyzer.new(@build.package.blob).metadata
@@ -67,8 +72,9 @@ private
   end
 
   def package_url
-    ActiveStorage::Current.host = 'http://localhost:3000' if local?
-    CGI.escapeHTML Rails.application.routes.url_helpers.build_package_url(@build.signed_id)
+    signed_id = @build.signed_id
+    url = Rails.application.routes.url_helpers.build_package_url(signed_id, DEFAULT_URL_OPTIONS)
+    CGI.escapeHTML(url)
   end
 
   def local?
