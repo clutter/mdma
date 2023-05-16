@@ -1,5 +1,4 @@
-MDM Agent
-=========
+# MDM Agent
 
 Mdma helps you deploy an iOS app to many devices at scheduled times with [SimpleMDM](https://www.simplemdm.com).
 
@@ -22,8 +21,7 @@ After [setting up the right groups on SimpleMDM](#setup), you can do the followi
 
 [3] Browse the list of all devices to check the current version of the app
 
-How it works
-============
+# How it works
 
 The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 10 minutes.
 `bundle exec rake deploys:enqueue` checks whether any build needs to be deployed soon and adds to the queue.
@@ -31,8 +29,7 @@ The app is hosted on Heroku and relies on one job run by Heroku Scheduler every 
 A separate job is run on Heroku Scheduler every day.
 `bundle exec rake devices:fetch` fetches the list of devices with the latest app version.
 
-How to use as an API
-====================
+# How to use as an API
 
 Apart from using the web flow, third-party clients can also create internal builds by means of an API.
 In order to do so, an option `MDMA_TOKEN` must be set in the mdma app and communicated to the third-party clients.
@@ -51,16 +48,13 @@ and can expect one of the following responses:
 - 401 Unauthorized (no body): the provided token is missing or invalid
 - 400 Bad Request (JSON body with "message" String): the params are invalid
 
-
-How to contribute
-=================
+# How to contribute
 
 Whenever a new PR is opened, a new Review App is created on Heroku, where you can test your code.
 The Review App uses a test app called Ugly Sweater with a test device group.
 Test your features on the review app and make sure that Code Climate is happy, then merge.
 
-How to configure
-================
+# How to configure
 
 In order to use `mdma`, the following environment variables need to be set:
 
