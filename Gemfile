@@ -13,13 +13,6 @@ gem 'simplemdm', '~> 1.3'                  # Connect to SimpleMDM API
 gem 'honeybadger', '~> 4.1'                # Log errors
 gem 'rubyzip'                              # Extract Info.plist from build package
 gem 'CFPropertyList', '~> 3.0'             # Parse Info.plist from build package
-gem 'sorbet-runtime'
-gem 'sorbet-rails'
-
-group :development do
-  gem 'sorbet'
-  gem 'tapioca', require: false
-end
 
 group :development, :test do
   gem 'pry-byebug', '~> 3.6'               # Debugger with 'next' option
@@ -29,9 +22,9 @@ end
 
 group :test do
   gem 'rspec_junit_formatter'
-  gem 'rspec-rails', '>= 3.7', '< 4.0'     # Testing framework
-  gem 'capybara', '>= 2.15', '< 4.0'       # Runs system tests
+  gem 'rspec-rails'                        # Testing framework
+  gem 'capybara'                           # Runs system tests
   gem 'selenium-webdriver'                 # Runs system tests
-  gem 'webdrivers', '~> 4.0'               # Runs system tests in Chrome
+  gem 'webdrivers'                         # Runs system tests in Chrome
   gem 'simplecov'                          # Measure code coverage
 end

@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@1.1.1
-  browser-tools: circleci/browser-tools@1.1
+  ruby: circleci/ruby@2.1.1
+  browser-tools: circleci/browser-tools@1.4.8
 
 executors:
   default:
@@ -38,12 +38,6 @@ jobs:
       - checkout
       - ruby/install-deps
       - ruby/rubocop-check
-  sorbet:
-    executor: default
-    steps:
-      - checkout
-      - ruby/install-deps
-      - run: bundle exec srb tc --ignore=/vendor/bundle
 
 workflows:
   version: 2.1
@@ -51,4 +45,3 @@ workflows:
     jobs:
       - rspec
       - rubocop
-      - sorbet
