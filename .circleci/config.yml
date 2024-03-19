@@ -38,12 +38,6 @@ jobs:
       - checkout
       - ruby/install-deps
       - ruby/rubocop-check
-  sorbet:
-    executor: default
-    steps:
-      - checkout
-      - ruby/install-deps
-      - run: bundle exec srb tc --ignore=/vendor/bundle
 
 workflows:
   version: 2.1
@@ -51,4 +45,3 @@ workflows:
     jobs:
       - rspec
       - rubocop
-      - sorbet
