@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resource :minimum_supported_version, only: :update
     end
   end
+  get '/builds/:signed_build_id/package', to: 'builds/packages#show', as: :build_package
   resources :internal_builds, only: %i[index]
   resources :enqueues, only: %i[create]
   resources :devices, only: %i[index]
