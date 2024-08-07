@@ -9,11 +9,13 @@ class BuildsController < ApplicationController
   end
 
   def new
-    @build = Build.new deploy_time: Time.strptime('03:00', '%H:%M')
+    @build = Build.new(deploy_date: Date.tomorrow, deploy_time: Time.strptime('20:00', '%H:%M'))
   end
 
   def create
     @build = Build.new(build_params)
+    @build.deploy_date = @build.deploy_date
+    @build.deploy_time = @build.deploy_time
 
     if @build.save
       redirect_to @build.external? ? root_url : internal_builds_url
