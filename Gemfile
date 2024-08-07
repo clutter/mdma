@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.7.6'
+ruby '2.7.8'
 
 gem 'rails', '~> 6.0.0'                    # Rails framework
-gem 'pg', '~> 0.18'                        # Database for Active Record
+gem 'pg', '~> 1.5'                         # Database for Active Record
 gem 'sidekiq', '~> 5.0'                    # Background processor
 gem 'puma', '~> 3.12'                      # Fast and concurrent web server
 gem 'bootsnap', '>= 1.1.0', require: false # Speed up Rails boot time
