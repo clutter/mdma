@@ -8,9 +8,7 @@ module FormHelper
   end
 
   def with_errors_on(model, *attributes)
-    attributes_with_errors = model.errors.keys & attributes
-
-    if attributes_with_errors.any?
+    if attributes.any? { |attribute| model.errors[attribute].present? }
       yield(class: 'form-control is-invalid')
       errors = attributes.flat_map { |attribute| model.errors.full_messages_for(attribute) }
       concat tag.div(errors.to_sentence, class: 'invalid-feedback')

@@ -63,6 +63,15 @@ In order to use `mdma`, the following environment variables need to be set:
 - `MDMA_APP_IDENTIFIER`: The unique identifier of the iOS app
 - `RAILS_MASTER_KEY`: The key to decrypt the credentials stored in `config/credentials.yml.enc`
 
+For local usage assign the following:
+
+```
+# .env
+MDMA_APP_GROUP_ID='21707'
+MDMA_APP_ID='91051'
+MDMA_APP_IDENTIFIER='com.clutter.UglySweater'
+```
+
 The following environment variables are optional:
 
 - `EMAIL_DOMAIN`: Only allow logins from Google accounts belonging to this domain
